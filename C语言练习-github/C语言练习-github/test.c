@@ -49,3 +49,50 @@
 //}
 
 
+
+#include<stdio.h>
+#include<stdlib.h>
+int main()
+{
+	int N = 50;
+	int a = 1;
+	int* tmp = (int*)malloc(sizeof(int) * N);
+	for (int i = 0; i < 50; i++)
+	{
+		tmp[i] = a;
+		a += 2;
+	}
+	for (int i = 0; i < N; i++)
+	{
+		printf("%d ", tmp[i]);
+	}
+
+	printf("\n");
+
+	int check;
+	scanf("%d", &check);
+
+	int l = 0;
+	int r = N - 1;
+
+	while (l<r)
+	{
+		int mid = r / 2;
+		if (check > tmp[mid])
+		{
+			l = mid;
+		}
+		else
+		{
+			r = mid;
+		}
+		if (check == tmp[mid])
+		{
+			printf("ур╣╫ак\n");
+			break;
+		}
+	}
+	
+
+	return 0;
+}
