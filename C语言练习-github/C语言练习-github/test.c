@@ -216,11 +216,219 @@
 //}
 
 
+//#pragma pack(2)
+//#include<stdio.h>
+//
+//struct str1
+//{
+//    char i;
+//    int j;
+//    char k;
+//};
+//struct str2
+//{
+//    char a;
+//    struct str1 s1;
+//    double b;
+//};
+//int main()
+//{
+//    printf("%d\n", sizeof(struct str1));
+//    printf("%d\n", sizeof(struct str2));
+//    return 0;
+//}
+
+
+//struct str1
+//{
+//	int i;
+//	int j;
+//};
+//struct str2
+//{
+//	char a;
+//	struct str1 b;
+//	int c;
+//};
+//int main()
+//{
+//	printf("%d", sizeof(struct str2));
+//	return 0;
+//}
+
+
+
+//#pragma pack(2)
+//#include<stdio.h>
+//
+//struct str
+//{
+//	char i;
+//	int j;
+//};
+//
+//int main()
+//{
+//	printf("%d\n", sizeof(struct str));
+//	return 0;
+//}
+
+
+
+//#include<stdio.h>
+//
+//void GetMemory(char* p)
+//{
+//	p = (char*)malloc(100);
+//}
+//void Test(void)
+//{
+//	char* str = NULL;
+//	GetMemory(str);
+//	strcpy(str, "hello world");
+//	printf(str);
+//}
+//
+//int main()
+//{
+//	Test();
+//	return 0;
+//}
+
+
+//#include<stdio.h>
+//union Un1
+//{
+//	char c[5];
+//	int i;
+//};
+//union Un2
+//{
+//	short c[7];
+//	int i;
+//};
+////下面输出的结果是什么？
+//int main()
+//{
+//	printf("%d\n", sizeof(union Un1));
+//	printf("%d\n", sizeof(union Un2));
+//	return 0;
+//}
+
+
+
+//#include<stdio.h>
+//#include<stdlib.h>
+//int main()
+//{
+//	int* p = NULL;
+//	*p = 10;
+//	return 0;
+//}
+
+
+//#include<stdio.h>
+//
+//void move(int* nums, int head, int* numsSize)
+//{
+//    while (head < (*numsSize))
+//    {
+//        nums[head] = nums[head + 1];
+//        head++;
+//    }
+//    (*numsSize)--;
+//}
+//
+//int removeDuplicates(int* nums, int numsSize)
+//{
+//    int i = 1;
+//    int tmp = nums[0];
+//    while (i < numsSize)
+//    {
+//        while (nums[i] == tmp)
+//        {
+//            move(nums, i, &numsSize);
+//        }
+//        tmp = nums[i];
+//        i++;
+//    }
+//    return numsSize;
+//}
+//
+//int main()
+//{
+//	int arr[] = { 0,0,1,1,1,2,2,3,3,4 };
+//	int sz = sizeof(arr) / sizeof(int);
+//    int len=removeDuplicates(arr, sz);
+//
+//    for (int i = 0; i < len; i++)
+//    {
+//        printf("%d ", arr[i]);
+//    }
+//
+//	return 0;
+//}
+
 
 #include<stdio.h>
+#include<stdlib.h>
+
+void merge(int* nums1, int nums1Size, int m, int* nums2, int nums2Size, int n)
+{
+    int* arr = (int*)malloc(sizeof(int) * n * m);
+    if (arr == NULL)
+    {
+        printf("开辟失败\n");
+        exit(-1);
+    }
+    int i = 0;
+    int j = 0;
+    int k = 0;
+    while (i < m && j < n)
+    {
+        if (nums1[i] <= nums2[j])
+        {
+            arr[k] = nums1[i];
+            i++;
+            k++;
+        }
+        else
+        {
+            arr[k] = nums2[j];
+            j++;
+            k++;
+        }
+    }
+    if (i == m)
+    {
+        while (j < n)
+        {
+            arr[k] = nums2[j];
+            k++;
+            j++;
+        }
+    }
+    else
+    {
+        while (i < m)
+        {
+            arr[k] = nums1[i];
+            i++;
+            k++;
+        }
+    }
+    for (int i = 0; i < m + n; i++)
+    {
+        nums1[i] = arr[i];
+    }
+}
 
 int main()
 {
-
+	int arr1[6] = { 1,2,3 };
+	int arr2[] = { 2,5,6 };
+    int sz1 = sizeof(arr1) / sizeof(int);
+    int sz2 = sizeof(arr2) / sizeof(int);
+    merge(arr1, sz1, 3, arr2, sz2, sz2);
 	return 0;
 }
