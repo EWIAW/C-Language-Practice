@@ -370,65 +370,154 @@
 //}
 
 
+//#include<stdio.h>
+//#include<stdlib.h>
+//
+//void merge(int* nums1, int nums1Size, int m, int* nums2, int nums2Size, int n)
+//{
+//    int* arr = (int*)malloc(sizeof(int) * n * m);
+//    if (arr == NULL)
+//    {
+//        printf("开辟失败\n");
+//        exit(-1);
+//    }
+//    int i = 0;
+//    int j = 0;
+//    int k = 0;
+//    while (i < m && j < n)
+//    {
+//        if (nums1[i] <= nums2[j])
+//        {
+//            arr[k] = nums1[i];
+//            i++;
+//            k++;
+//        }
+//        else
+//        {
+//            arr[k] = nums2[j];
+//            j++;
+//            k++;
+//        }
+//    }
+//    if (i == m)
+//    {
+//        while (j < n)
+//        {
+//            arr[k] = nums2[j];
+//            k++;
+//            j++;
+//        }
+//    }
+//    else
+//    {
+//        while (i < m)
+//        {
+//            arr[k] = nums1[i];
+//            i++;
+//            k++;
+//        }
+//    }
+//    for (int i = 0; i < m + n; i++)
+//    {
+//        nums1[i] = arr[i];
+//    }
+//}
+//
+//int main()
+//{
+//	int arr1[6] = { 1,2,3 };
+//	int arr2[] = { 2,5,6 };
+//    int sz1 = sizeof(arr1) / sizeof(int);
+//    int sz2 = sizeof(arr2) / sizeof(int);
+//    merge(arr1, sz1, 3, arr2, sz2, sz2);
+//	return 0;
+//}
+
+
 #include<stdio.h>
 #include<stdlib.h>
 
-void merge(int* nums1, int nums1Size, int m, int* nums2, int nums2Size, int n)
+struct ListNode
 {
-    int* arr = (int*)malloc(sizeof(int) * n * m);
-    if (arr == NULL)
-    {
-        printf("开辟失败\n");
-        exit(-1);
-    }
-    int i = 0;
-    int j = 0;
-    int k = 0;
-    while (i < m && j < n)
-    {
-        if (nums1[i] <= nums2[j])
-        {
-            arr[k] = nums1[i];
-            i++;
-            k++;
-        }
-        else
-        {
-            arr[k] = nums2[j];
-            j++;
-            k++;
-        }
-    }
-    if (i == m)
-    {
-        while (j < n)
-        {
-            arr[k] = nums2[j];
-            k++;
-            j++;
-        }
-    }
-    else
-    {
-        while (i < m)
-        {
-            arr[k] = nums1[i];
-            i++;
-            k++;
-        }
-    }
-    for (int i = 0; i < m + n; i++)
-    {
-        nums1[i] = arr[i];
-    }
+	int val;
+	struct ListNode* next;
+};
+
+struct ListNode* BuySListNode(int x)//创建节点
+{
+	struct ListNode* newnode = (struct ListNode*)malloc(sizeof(struct ListNode));
+	if (newnode == NULL)
+	{
+		printf("申请节点失败\n");
+		exit(-1);
+	}
+	newnode->val = x;
+	newnode->next = NULL;
+	return newnode;
+}
+
+void SListPushBack(struct ListNode** phead, int x)//尾部插入
+{
+	struct ListNode* newnode = BuySListNode(x);
+	struct ListNode* tail = *phead;
+	if (tail == NULL)
+	{
+		*phead = newnode;
+	}
+	else
+	{
+		while (tail->next != NULL)
+		{
+			tail = tail->next;
+		}
+		tail->next = newnode;
+	}
+}
+
+void SListPrint(struct ListNode** phead)//输出
+{
+	struct ListNode* cur = *phead;
+	while (cur != NULL)
+	{
+		printf("%d->", cur->val);
+		cur = cur->next;
+	}
+	printf("NULL\n");
+}
+
+struct ListNode* reverseList(struct ListNode* head)
+{
+	if (head == NULL)
+	{
+		return head;
+	}
+	else
+	{
+		struct ListNode* tail = head->next;
+		head->next = NULL;
+		while (tail != NULL)
+		{
+			struct ListNode* newnode = (struct ListNode*)malloc(sizeof(struct ListNode));
+			newnode->val = tail->val;
+			newnode->next = head;
+			head = newnode;
+			tail = tail->next;
+		}
+	}
+	return head;
 }
 
 int main()
 {
-	int arr1[6] = { 1,2,3 };
-	int arr2[] = { 2,5,6 };
-    int sz1 = sizeof(arr1) / sizeof(int);
-    int sz2 = sizeof(arr2) / sizeof(int);
-    merge(arr1, sz1, 3, arr2, sz2, sz2);
+	struct ListNode* head = NULL;
+	SListPushBack(&head, 1);
+	SListPushBack(&head, 2);
+	SListPushBack(&head, 3);
+	SListPushBack(&head, 4);
+	SListPushBack(&head, 5);
+
+	head = reverseList(head);
+
+	SListPrint(&head);
 	return 0;
 }
