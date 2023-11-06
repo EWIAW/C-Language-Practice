@@ -434,6 +434,95 @@
 //}
 
 
+//#include<stdio.h>
+//#include<stdlib.h>
+//
+//struct ListNode
+//{
+//	int val;
+//	struct ListNode* next;
+//};
+//
+//struct ListNode* BuySListNode(int x)//创建节点
+//{
+//	struct ListNode* newnode = (struct ListNode*)malloc(sizeof(struct ListNode));
+//	if (newnode == NULL)
+//	{
+//		printf("申请节点失败\n");
+//		exit(-1);
+//	}
+//	newnode->val = x;
+//	newnode->next = NULL;
+//	return newnode;
+//}
+//
+//void SListPushBack(struct ListNode** phead, int x)//尾部插入
+//{
+//	struct ListNode* newnode = BuySListNode(x);
+//	struct ListNode* tail = *phead;
+//	if (tail == NULL)
+//	{
+//		*phead = newnode;
+//	}
+//	else
+//	{
+//		while (tail->next != NULL)
+//		{
+//			tail = tail->next;
+//		}
+//		tail->next = newnode;
+//	}
+//}
+//
+//void SListPrint(struct ListNode** phead)//输出
+//{
+//	struct ListNode* cur = *phead;
+//	while (cur != NULL)
+//	{
+//		printf("%d->", cur->val);
+//		cur = cur->next;
+//	}
+//	printf("NULL\n");
+//}
+//
+//struct ListNode* reverseList(struct ListNode* head)
+//{
+//	if (head == NULL)
+//	{
+//		return head;
+//	}
+//	else
+//	{
+//		struct ListNode* tail = head->next;
+//		head->next = NULL;
+//		while (tail != NULL)
+//		{
+//			struct ListNode* newnode = (struct ListNode*)malloc(sizeof(struct ListNode));
+//			newnode->val = tail->val;
+//			newnode->next = head;
+//			head = newnode;
+//			tail = tail->next;
+//		}
+//	}
+//	return head;
+//}
+//
+//int main()
+//{
+//	struct ListNode* head = NULL;
+//	SListPushBack(&head, 1);
+//	SListPushBack(&head, 2);
+//	SListPushBack(&head, 3);
+//	SListPushBack(&head, 4);
+//	SListPushBack(&head, 5);
+//
+//	head = reverseList(head);
+//
+//	SListPrint(&head);
+//	return 0;
+//}
+
+
 #include<stdio.h>
 #include<stdlib.h>
 
@@ -443,81 +532,101 @@ struct ListNode
 	struct ListNode* next;
 };
 
-struct ListNode* BuySListNode(int x)//创建节点
+struct ListNode* mergeTwoLists(struct ListNode* list1, struct ListNode* list2)
 {
-	struct ListNode* newnode = (struct ListNode*)malloc(sizeof(struct ListNode));
-	if (newnode == NULL)
-	{
-		printf("申请节点失败\n");
-		exit(-1);
-	}
-	newnode->val = x;
-	newnode->next = NULL;
-	return newnode;
-}
-
-void SListPushBack(struct ListNode** phead, int x)//尾部插入
-{
-	struct ListNode* newnode = BuySListNode(x);
-	struct ListNode* tail = *phead;
-	if (tail == NULL)
-	{
-		*phead = newnode;
-	}
-	else
-	{
-		while (tail->next != NULL)
-		{
-			tail = tail->next;
-		}
-		tail->next = newnode;
-	}
-}
-
-void SListPrint(struct ListNode** phead)//输出
-{
-	struct ListNode* cur = *phead;
-	while (cur != NULL)
-	{
-		printf("%d->", cur->val);
-		cur = cur->next;
-	}
-	printf("NULL\n");
-}
-
-struct ListNode* reverseList(struct ListNode* head)
-{
-	if (head == NULL)
-	{
-		return head;
-	}
-	else
-	{
-		struct ListNode* tail = head->next;
-		head->next = NULL;
-		while (tail != NULL)
-		{
-			struct ListNode* newnode = (struct ListNode*)malloc(sizeof(struct ListNode));
-			newnode->val = tail->val;
-			newnode->next = head;
-			head = newnode;
-			tail = tail->next;
-		}
-	}
-	return head;
+    struct ListNode* list1next;
+    struct ListNode* list2next;
+    struct ListNode* newlist = NULL;
+    struct ListNode* tail = NULL;
+    if (list1 == NULL && list2 == NULL)
+    {
+        return NULL;
+    }
+    if (list1 == NULL)
+    {
+        return list2;
+    }
+    if (list2 == NULL)
+    {
+        return list1;
+    }
+    while (list1 != NULL && list2 != NULL)
+    {
+        if ((list1->val) <= (list2->val))
+        {
+            if (newlist == NULL)
+            {
+                list1next = list1->next;
+                list1->next = newlist;
+                newlist = list1;
+                list1 = list1next;
+                tail = newlist;
+                list1 = list2next;
+            }
+            else
+            {
+                list1next = list1->next;
+                list1->next = tail->next;
+                tail->next = list1;
+                tail = tail->next;
+                list1 = list1next;
+            }
+        }
+        else
+        {
+            if (newlist == NULL)
+            {
+                list2next = list2->next;
+                list2->next = newlist;
+                newlist = list2;
+                list2 = list2next;
+                tail = newlist;
+                list2 = list2next;
+            }
+            else
+            {
+                list2next = list2->next;
+                list2->next = tail->next;
+                tail->next = list2;
+                tail = tail->next;
+            }
+        }
+    }
+    if (list1 == NULL)
+    {
+        tail->next = list2;
+    }
+    else
+    {
+        tail->next = list1;
+    }
+    return newlist;
 }
 
 int main()
 {
-	struct ListNode* head = NULL;
-	SListPushBack(&head, 1);
-	SListPushBack(&head, 2);
-	SListPushBack(&head, 3);
-	SListPushBack(&head, 4);
-	SListPushBack(&head, 5);
+	struct ListNode* A = (struct ListNode*)malloc(sizeof(struct ListNode));
+	A->val = 1;
+	struct ListNode* B = (struct ListNode*)malloc(sizeof(struct ListNode));
+	B->val = 2;
+	struct ListNode* C = (struct ListNode*)malloc(sizeof(struct ListNode));
+	C->val = 4;
 
-	head = reverseList(head);
+	A->next = B;
+	B->next = C;
+	C->next = NULL;
+	
+	struct ListNode* E = (struct ListNode*)malloc(sizeof(struct ListNode));
+	E->val = 1;
+	struct ListNode* F = (struct ListNode*)malloc(sizeof(struct ListNode));
+	F->val = 3;
+	struct ListNode* G = (struct ListNode*)malloc(sizeof(struct ListNode));
+	G->val = 4;
 
-	SListPrint(&head);
+	E->next = F;
+	F->next = G;
+	G->next = NULL;
+
+    mergeTwoLists(A, E);
 	return 0;
 }
