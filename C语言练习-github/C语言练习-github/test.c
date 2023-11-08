@@ -523,110 +523,228 @@
 //}
 
 
-#include<stdio.h>
-#include<stdlib.h>
+//#include<stdio.h>
+//#include<stdlib.h>
+//
+//struct ListNode
+//{
+//	int val;
+//	struct ListNode* next;
+//};
+//
+//struct ListNode* mergeTwoLists(struct ListNode* list1, struct ListNode* list2)
+//{
+//    struct ListNode* list1next;
+//    struct ListNode* list2next;
+//    struct ListNode* newlist = NULL;
+//    struct ListNode* tail = NULL;
+//    if (list1 == NULL && list2 == NULL)
+//    {
+//        return NULL;
+//    }
+//    if (list1 == NULL)
+//    {
+//        return list2;
+//    }
+//    if (list2 == NULL)
+//    {
+//        return list1;
+//    }
+//    while (list1 != NULL && list2 != NULL)
+//    {
+//        if ((list1->val) <= (list2->val))
+//        {
+//            if (newlist == NULL)
+//            {
+//                list1next = list1->next;
+//                list1->next = newlist;
+//                newlist = list1;
+//                list1 = list1next;
+//                tail = newlist;
+//                list1 = list2next;
+//            }
+//            else
+//            {
+//                list1next = list1->next;
+//                list1->next = tail->next;
+//                tail->next = list1;
+//                tail = tail->next;
+//                list1 = list1next;
+//            }
+//        }
+//        else
+//        {
+//            if (newlist == NULL)
+//            {
+//                list2next = list2->next;
+//                list2->next = newlist;
+//                newlist = list2;
+//                list2 = list2next;
+//                tail = newlist;
+//                list2 = list2next;
+//            }
+//            else
+//            {
+//                list2next = list2->next;
+//                list2->next = tail->next;
+//                tail->next = list2;
+//                tail = tail->next;
+//            }
+//        }
+//    }
+//    if (list1 == NULL)
+//    {
+//        tail->next = list2;
+//    }
+//    else
+//    {
+//        tail->next = list1;
+//    }
+//    return newlist;
+//}
+//
+//int main()
+//{
+//	struct ListNode* A = (struct ListNode*)malloc(sizeof(struct ListNode));
+//	A->val = 1;
+//	struct ListNode* B = (struct ListNode*)malloc(sizeof(struct ListNode));
+//	B->val = 2;
+//	struct ListNode* C = (struct ListNode*)malloc(sizeof(struct ListNode));
+//	C->val = 4;
+//
+//	A->next = B;
+//	B->next = C;
+//	C->next = NULL;
+//	
+//	struct ListNode* E = (struct ListNode*)malloc(sizeof(struct ListNode));
+//	E->val = 1;
+//	struct ListNode* F = (struct ListNode*)malloc(sizeof(struct ListNode));
+//	F->val = 3;
+//	struct ListNode* G = (struct ListNode*)malloc(sizeof(struct ListNode));
+//	G->val = 4;
+//
+//	E->next = F;
+//	F->next = G;
+//	G->next = NULL;
+//
+//    mergeTwoLists(A, E);
+//	return 0;
+//}
 
-struct ListNode
-{
-	int val;
-	struct ListNode* next;
-};
 
-struct ListNode* mergeTwoLists(struct ListNode* list1, struct ListNode* list2)
-{
-    struct ListNode* list1next;
-    struct ListNode* list2next;
-    struct ListNode* newlist = NULL;
-    struct ListNode* tail = NULL;
-    if (list1 == NULL && list2 == NULL)
-    {
-        return NULL;
-    }
-    if (list1 == NULL)
-    {
-        return list2;
-    }
-    if (list2 == NULL)
-    {
-        return list1;
-    }
-    while (list1 != NULL && list2 != NULL)
-    {
-        if ((list1->val) <= (list2->val))
-        {
-            if (newlist == NULL)
-            {
-                list1next = list1->next;
-                list1->next = newlist;
-                newlist = list1;
-                list1 = list1next;
-                tail = newlist;
-                list1 = list2next;
-            }
-            else
-            {
-                list1next = list1->next;
-                list1->next = tail->next;
-                tail->next = list1;
-                tail = tail->next;
-                list1 = list1next;
-            }
-        }
-        else
-        {
-            if (newlist == NULL)
-            {
-                list2next = list2->next;
-                list2->next = newlist;
-                newlist = list2;
-                list2 = list2next;
-                tail = newlist;
-                list2 = list2next;
-            }
-            else
-            {
-                list2next = list2->next;
-                list2->next = tail->next;
-                tail->next = list2;
-                tail = tail->next;
-            }
-        }
-    }
-    if (list1 == NULL)
-    {
-        tail->next = list2;
-    }
-    else
-    {
-        tail->next = list1;
-    }
-    return newlist;
-}
-
-int main()
-{
-	struct ListNode* A = (struct ListNode*)malloc(sizeof(struct ListNode));
-	A->val = 1;
-	struct ListNode* B = (struct ListNode*)malloc(sizeof(struct ListNode));
-	B->val = 2;
-	struct ListNode* C = (struct ListNode*)malloc(sizeof(struct ListNode));
-	C->val = 4;
-
-	A->next = B;
-	B->next = C;
-	C->next = NULL;
-	
-	struct ListNode* E = (struct ListNode*)malloc(sizeof(struct ListNode));
-	E->val = 1;
-	struct ListNode* F = (struct ListNode*)malloc(sizeof(struct ListNode));
-	F->val = 3;
-	struct ListNode* G = (struct ListNode*)malloc(sizeof(struct ListNode));
-	G->val = 4;
-
-	E->next = F;
-	F->next = G;
-	G->next = NULL;
-
-    mergeTwoLists(A, E);
-	return 0;
-}
+//#include<stdio.h>
+//#include<stdlib.h>
+//
+//typedef struct ListNode
+//{
+//	int val;
+//	struct ListNode* next;
+//}ListNode;
+//
+//ListNode* partition(ListNode* pHead, int x)
+//{
+//    int i = 0;
+//    struct ListNode* first = (struct ListNode*)malloc(sizeof(struct ListNode));
+//    first->next = pHead;
+//    pHead = first;
+//    struct ListNode* FirstPushBack = first;
+//    struct ListNode* tail = pHead;
+//    struct ListNode* move = pHead->next;
+//    struct ListNode* movenext;
+//    while (tail->next != NULL)
+//    {
+//        tail = tail->next;
+//    }
+//    while (move != FirstPushBack && move != NULL)
+//    {
+//        if (move->val >= x)
+//        {
+//            i++;
+//            if (i == 1)
+//            {
+//                FirstPushBack = move;
+//            }
+//            movenext = move->next;
+//            move->next = tail->next;
+//            tail->next = move;
+//            tail = tail->next;
+//            first->next = movenext;
+//            move = movenext;
+//        }
+//        else
+//        {
+//            first = first->next;
+//            move = move->next;
+//        }
+//    }
+//    return first->next;
+//}
+//
+//ListNode* partition2(ListNode* pHead, int x)
+//{
+//    ListNode* smalllist = (ListNode*)malloc(sizeof(ListNode));
+//    ListNode* biglist = (ListNode*)malloc(sizeof(ListNode));
+//    ListNode* smalltail = smalllist;
+//    ListNode* bigtail = biglist;
+//    smalllist->next = NULL;
+//    biglist->next = NULL;
+//    ListNode* pHeadnext;
+//    while (pHead != NULL)
+//    {
+//        if (pHead->val < x)
+//        {
+//            pHeadnext = pHead->next;
+//            pHead->next = smalltail->next;
+//            smalltail->next = pHead;
+//            smalltail = smalltail->next;
+//            pHead = pHeadnext;
+//        }
+//        else
+//        {
+//            pHeadnext = pHead->next;
+//            pHead->next = bigtail->next;
+//            bigtail->next = pHead;
+//            bigtail = bigtail->next;
+//            pHead = pHeadnext;
+//        }
+//    }
+//    smalltail->next = biglist->next;
+//    return smalltail;
+//}
+//
+//int main()
+//{
+//	struct ListNode* a = (struct ListNode*)malloc(sizeof(struct ListNode));
+//	a->val = 3;
+//
+//	struct ListNode* b = (struct ListNode*)malloc(sizeof(struct ListNode));
+//	b->val = 3;
+//
+//	struct ListNode* c = (struct ListNode*)malloc(sizeof(struct ListNode));
+//	c->val = 3;
+//
+//	//struct ListNode* d = (struct ListNode*)malloc(sizeof(struct ListNode));
+//	//d->val = 8;
+//
+//	//struct ListNode* e = (struct ListNode*)malloc(sizeof(struct ListNode));
+//	//e->val = 100;
+//
+//	//struct ListNode* f = (struct ListNode*)malloc(sizeof(struct ListNode));
+//	//f->val = 90;
+//
+//	//struct ListNode* g = (struct ListNode*)malloc(sizeof(struct ListNode));
+//	//g->val = 1;
+//
+//
+//	a->next = b;
+//	b->next = c;
+//	c->next = NULL;
+//	//d->next = e;
+//	//e->next = f;
+//	//f->next = g;
+// //   g->next = NULL;
+//
+//    partition2(a,3);
+//
+//    return 0;
+//}
