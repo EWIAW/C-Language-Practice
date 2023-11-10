@@ -1,0 +1,6 @@
+﻿cl : 命令行  warning D9025: 正在重写“/sdl”(用“/GS-”)
+  game.c
+D:\VS代码\扫雷\扫雷\game.h(1,1): warning C4828: 文件包含在偏移 0x20d 处开始的字符，该字符在当前源字符集中无效(代码页 936)。
+D:\VS代码\扫雷\扫雷\game.c(65,15): warning C4013: “get_around_mine”未定义；假设外部返回 int
+D:\VS代码\扫雷\扫雷\game.c(55,3): warning C4996: 'scanf': This function or variable may be unsafe. Consider using scanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  扫雷.vcxproj -> D:\VS代码\扫雷\x64\Debug\扫雷.exe
