@@ -748,3 +748,66 @@
 //
 //    return 0;
 //}
+
+
+//#include<stdio.h>
+//#include<stdlib.h>
+//#include<limits.h>
+//#define INT_MAX
+//
+//struct ListNode
+//{
+//	int val;
+//	struct ListNode* next;
+//};
+//
+//struct ListNode* detectCycle(struct ListNode* head)
+//{
+//    struct ListNode* arr[10000];
+//    int size = 0;
+//    while (head != NULL)
+//    {
+//        int i = 0;
+//        while (i < size)
+//        {
+//            if (arr[i] == &(*head))
+//            {
+//                return head;
+//            }
+//            else
+//            {
+//                i++;
+//            }
+//        }
+//        arr[size] = &(*head);
+//        size++;
+//        head = head->next;
+//    }
+//    return NULL;
+//}
+//
+//int main()
+//{
+//	struct ListNode* a = (struct ListNode*)malloc(sizeof(struct ListNode));
+//	a->val = 1;
+//
+//	struct ListNode* b = (struct ListNode*)malloc(sizeof(struct ListNode));
+//	b->val = 2;
+//
+//	a->next = b;
+//	b->next = NULL;
+//
+//    struct ListNode* ret=detectCycle(a);
+//
+//	return 0;
+//}
+
+
+//#include<stdio.h>
+//#include<limits.h>
+//
+//int main()
+//{
+//	printf("%u", UINT_MAX);
+//	return 0;
+//}
