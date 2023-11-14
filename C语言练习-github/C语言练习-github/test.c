@@ -811,3 +811,86 @@
 //	printf("%u", UINT_MAX);
 //	return 0;
 //}
+
+#include<stdio.h>
+#include<stdlib.h>
+
+
+
+struct Node
+{
+	int val;
+	struct Node* next;
+	struct Node* random;
+};
+
+struct Node* copyRandomList(struct Node* head)
+{
+    struct Node* first = (struct Node*)malloc(sizeof(struct Node));
+    first->next = NULL;
+
+    struct Node* tailfirst = first;
+    struct Node* tailhead = head;
+    while (tailhead != NULL)
+    {
+        struct Node* newnode = (struct Node*)malloc(sizeof(struct Node));
+        newnode->val = tailhead->val;
+        newnode->next = NULL;
+        tailfirst->next = newnode;
+        tailfirst = tailfirst->next;
+        tailhead = tailhead->next;
+    }
+    tailhead = head;
+    tailfirst = first;
+    while (tailhead != NULL)
+    {
+        struct Node* randomposition = tailhead->random;
+        int size = 1;
+        struct Node* find = head;
+        while (find != randomposition)
+        {
+            find = find->next;
+            size++;
+        }
+        struct Node* findfirst = first;
+        while (size--)
+        {
+            findfirst = findfirst->next;
+        }
+        tailfirst->next->random = findfirst;
+        tailfirst = tailfirst->next;
+        tailhead = tailhead->next;
+    }
+    return first->next;
+}
+
+int main()
+{
+	struct Node* a = malloc(sizeof(struct Node));
+	a->val = 7;
+	struct Node* b = malloc(sizeof(struct Node));
+	b->val = 13;
+	struct Node* c = malloc(sizeof(struct Node));
+	c->val = 11;
+	struct Node* d = malloc(sizeof(struct Node));
+	d->val = 10;
+	struct Node* e = malloc(sizeof(struct Node));
+	e->val = 1;
+
+	a->next = b;
+	b->next = c;
+	c->next = d;
+	d->next = e;
+	e->next = NULL;
+
+	a->random = NULL;
+	b->random = a;
+	c->random = e;
+	d->random = c;
+	e->random = a;
+
+    struct Node* ret = copyRandomList(a);
+
+
+	return 0;
+}
