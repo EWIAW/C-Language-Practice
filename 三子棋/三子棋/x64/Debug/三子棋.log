@@ -1,5 +1,0 @@
-﻿cl : 命令行  warning D9025: 正在重写“/sdl”(用“/GS-”)
-  test.c
-D:\VS代码\三子棋\三子棋\game.h(1,1): warning C4828: 文件包含在偏移 0x230 处开始的字符，该字符在当前源字符集中无效(代码页 936)。
-D:\VS代码\三子棋\三子棋\test.c(63,3): warning C4996: 'scanf': This function or variable may be unsafe. Consider using scanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-  三子棋.vcxproj -> D:\VS代码\三子棋\x64\Debug\三子棋.exe
