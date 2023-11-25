@@ -1,0 +1,4 @@
+﻿cl : 命令行  warning D9025: 正在重写“/sdl”(用“/GS-”)
+  Screenmine.c
+D:\github\C-Language-Practice\改进扫雷\改进扫雷\game.h(1,1): warning C4828: 文件包含在偏移 0x273 处开始的字符，该字符在当前源字符集中无效(代码页 936)。
+  改进扫雷.vcxproj -> D:\github\C-Language-Practice\改进扫雷\x64\Debug\改进扫雷.exe
