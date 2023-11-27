@@ -1255,172 +1255,185 @@
 //}
 
 
-#include<stdio.h>
-#include<stdlib.h>
-#include<assert.h>
-#include<stdbool.h>
+//#include<stdio.h>
+//#include<stdlib.h>
+//#include<assert.h>
+//#include<stdbool.h>
+//
+//typedef struct Stack
+//{
+//    int* arr;
+//    int top;
+//    int capacity;
+//}Stack;
+//
+//void StackInit(Stack* S)
+//{
+//    assert(S);
+//    S->top = 0;
+//    S->capacity = 4;
+//    int* tmp = (int*)malloc(sizeof(int) * S->capacity);
+//    if (tmp == NULL)
+//    {
+//        printf("¿ª±ÙÊ§°Ü\n");
+//        exit(-1);
+//    }
+//    S->arr = tmp;
+//}
+//
+//void StackPush(Stack* S, int x)
+//{
+//    assert(S);
+//    if (S->top == S->capacity)
+//    {
+//        S->capacity = S->capacity * 2;
+//        int* tmp = (int*)realloc(S->arr, sizeof(S->capacity));
+//        if (tmp == NULL)
+//        {
+//            printf("¿ª±ÙÊ§°Ü\n");
+//            exit(-1);
+//        }
+//        S->arr = tmp;
+//    }
+//    S->arr[S->top] = x;
+//    S->top++;
+//}
+//
+//void StackPop(Stack* S)
+//{
+//    assert(S);
+//    S->top--;
+//}
+//
+//int StackPeek(Stack* S)
+//{
+//    assert(S);
+//    return S->arr[S->top - 1];
+//}
+//
+//bool StackEmpty(Stack* S)
+//{
+//    if (S->top == 0)
+//    {
+//        return true;
+//    }
+//    else
+//    {
+//        return false;
+//    }
+//}
+//
+//typedef struct
+//{
+//    Stack PushST;
+//    Stack PopST;
+//} MyQueue;
+//
+//
+//MyQueue* myQueueCreate()
+//{
+//    MyQueue* newQueue = (MyQueue*)malloc(sizeof(MyQueue));
+//    if (newQueue == NULL)
+//    {
+//        printf("¿ª±ÙÊ§°Ü\n");
+//        exit(-1);
+//    }
+//    StackInit(&(newQueue->PushST));
+//    StackInit(&(newQueue->PopST));
+//    return newQueue;
+//}
+//
+//void myQueuePush(MyQueue* obj, int x)
+//{
+//    assert(obj);
+//    StackPush(&(obj->PushST), x);
+//}
+//
+//int myQueuePop(MyQueue* obj)
+//{
+//    assert(obj);
+//    if ((obj->PopST).top == 0)
+//    {
+//        while (!StackEmpty(&(obj->PushST)))
+//        {
+//            int top = StackPeek(&(obj->PushST));
+//            StackPop(&(obj->PushST));
+//            StackPush(&(obj->PopST), top);
+//        }
+//    }
+//    int pop = StackPeek(&(obj->PopST));
+//    StackPop(&(obj->PopST));
+//    return pop;
+//}
+//
+//int myQueuePeek(MyQueue* obj)
+//{
+//    assert(obj);
+//    if ((obj->PopST).top == 0)
+//    {
+//        while (!StackEmpty(&(obj->PushST)))
+//        {
+//            int top = StackPeek(&(obj->PushST));
+//            StackPop(&(obj->PushST));
+//            StackPush(&(obj->PopST), top);
+//        }
+//    }
+//    return StackPeek(&(obj->PopST));
+//}
+//
+//bool myQueueEmpty(MyQueue* obj)
+//{
+//    if (StackEmpty(&(obj->PushST)) && StackEmpty(&(obj->PopST)))
+//    {
+//        return true;
+//    }
+//    else
+//    {
+//        return false;
+//    }
+//}
+//
+//void myQueueFree(MyQueue* obj)
+//{
+//    assert(obj);
+//    free((obj->PushST).arr);
+//    free((obj->PopST).arr);
+//}
+//
+///**
+// * Your MyQueue struct will be instantiated and called as such:
+// * MyQueue* obj = myQueueCreate();
+// * myQueuePush(obj, x);
+//
+// * int param_2 = myQueuePop(obj);
+//
+// * int param_3 = myQueuePeek(obj);
+//
+// * bool param_4 = myQueueEmpty(obj);
+//
+// * myQueueFree(obj);
+//*/
+//
+//int main()
+//{
+//    MyQueue* Q = myQueueCreate();
+//    myQueuePush(Q, 1);
+//    //int ret = myQueuePeek(Q);
+//    //printf("%d\n", ret);
+//    myQueuePop(Q);
+//    //myQueuePop(Q);
+//    return 0;
+//}
 
-typedef struct Stack
-{
-    int* arr;
-    int top;
-    int capacity;
-}Stack;
 
-void StackInit(Stack* S)
-{
-    assert(S);
-    S->top = 0;
-    S->capacity = 4;
-    int* tmp = (int*)malloc(sizeof(int) * S->capacity);
-    if (tmp == NULL)
-    {
-        printf("¿ª±ÙÊ§°Ü\n");
-        exit(-1);
-    }
-    S->arr = tmp;
-}
-
-void StackPush(Stack* S, int x)
-{
-    assert(S);
-    if (S->top == S->capacity)
-    {
-        S->capacity = S->capacity * 2;
-        int* tmp = (int*)realloc(S->arr, sizeof(S->capacity));
-        if (tmp == NULL)
-        {
-            printf("¿ª±ÙÊ§°Ü\n");
-            exit(-1);
-        }
-        S->arr = tmp;
-    }
-    S->arr[S->top] = x;
-    S->top++;
-}
-
-void StackPop(Stack* S)
-{
-    assert(S);
-    S->top--;
-}
-
-int StackPeek(Stack* S)
-{
-    assert(S);
-    return S->arr[S->top - 1];
-}
-
-bool StackEmpty(Stack* S)
-{
-    if (S->top == 0)
-    {
-        return true;
-    }
-    else
-    {
-        return false;
-    }
-}
-
-typedef struct
-{
-    Stack PushST;
-    Stack PopST;
-} MyQueue;
-
-
-MyQueue* myQueueCreate()
-{
-    MyQueue* newQueue = (MyQueue*)malloc(sizeof(MyQueue));
-    if (newQueue == NULL)
-    {
-        printf("¿ª±ÙÊ§°Ü\n");
-        exit(-1);
-    }
-    StackInit(&(newQueue->PushST));
-    StackInit(&(newQueue->PopST));
-    return newQueue;
-}
-
-void myQueuePush(MyQueue* obj, int x)
-{
-    assert(obj);
-    StackPush(&(obj->PushST), x);
-}
-
-int myQueuePop(MyQueue* obj)
-{
-    assert(obj);
-    if ((obj->PopST).top == 0)
-    {
-        while (!StackEmpty(&(obj->PushST)))
-        {
-            int top = StackPeek(&(obj->PushST));
-            StackPop(&(obj->PushST));
-            StackPush(&(obj->PopST), top);
-        }
-    }
-    int pop = StackPeek(&(obj->PopST));
-    StackPop(&(obj->PopST));
-    return pop;
-}
-
-int myQueuePeek(MyQueue* obj)
-{
-    assert(obj);
-    if ((obj->PopST).top == 0)
-    {
-        while (!StackEmpty(&(obj->PushST)))
-        {
-            int top = StackPeek(&(obj->PushST));
-            StackPop(&(obj->PushST));
-            StackPush(&(obj->PopST), top);
-        }
-    }
-    return StackPeek(&(obj->PopST));
-}
-
-bool myQueueEmpty(MyQueue* obj)
-{
-    if (StackEmpty(&(obj->PushST)) && StackEmpty(&(obj->PopST)))
-    {
-        return true;
-    }
-    else
-    {
-        return false;
-    }
-}
-
-void myQueueFree(MyQueue* obj)
-{
-    assert(obj);
-    free((obj->PushST).arr);
-    free((obj->PopST).arr);
-}
-
-/**
- * Your MyQueue struct will be instantiated and called as such:
- * MyQueue* obj = myQueueCreate();
- * myQueuePush(obj, x);
-
- * int param_2 = myQueuePop(obj);
-
- * int param_3 = myQueuePeek(obj);
-
- * bool param_4 = myQueueEmpty(obj);
-
- * myQueueFree(obj);
-*/
-
-int main()
-{
-    MyQueue* Q = myQueueCreate();
-    myQueuePush(Q, 1);
-    //int ret = myQueuePeek(Q);
-    //printf("%d\n", ret);
-    myQueuePop(Q);
-    //myQueuePop(Q);
-    return 0;
-}
+//#include<stdio.h>
+//#include<stdlib.h>
+//
+//void my_memset(void* dest,void val,)
+//
+//int main()
+//{
+//	char arr[10] = { 0 };
+//	memset(arr, 'a', (sizeof(arr) / sizeof(char)) - 1);
+//	printf(arr);
+//}
