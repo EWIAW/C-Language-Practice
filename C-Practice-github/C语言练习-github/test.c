@@ -1438,86 +1438,88 @@
 //	printf(arr);
 //}
 
-#include<stdio.h>
-#include<stdlib.h>
-#include<string.h>
+//#include<stdio.h>
+//#include<stdlib.h>
+//#include<string.h>
+//
+//
+//void swap(int* sum1, int* sum2)//交换堆中的两个数
+//{
+//    int tmp = *sum1;
+//    *sum1 = *sum2;
+//    *sum2 = tmp;
+//}
+//
+//void AdjustDown(int* arr, int k, int root)//向下调整算法  k为堆的元素个数  root为从那个根结点开始调
+//{
+//    int parent = root;
+//    int child = parent * 2 + 1;
+//
+//    while (child < k)
+//    {
+//        if ((child + 1) < k && arr[child + 1] > arr[child] )
+//        {
+//            child++;
+//        }
+//        if (arr[child] > arr[parent])
+//        {
+//            swap(&(arr[child]), &(arr[parent]));
+//            parent = child;
+//            child = parent * 2 + 1;
+//        }
+//        else
+//        {
+//            break;
+//        }
+//    }
+//
+//}
+//
+///**
+// * Note: The returned array must be malloced, assume caller calls free().
+// */
+//int* smallestK(int* arr, int arrSize, int k, int* returnSize)//建大堆
+//{
+//    if (k == 0)
+//    {
+//        *returnSize = 0;
+//        return NULL;
+//    }
+//    int* tmp = (int*)malloc(sizeof(int) * k);//开辟k个空间的数组     tmp为大堆
+//    if (tmp == NULL)
+//    {
+//        printf("开辟失败\n");
+//        exit(-1);
+//    }
+//
+//    memcpy(tmp, arr, sizeof(int) * k);
+//
+//    for (int i = (k - 1 - 1) / 2; i >= 0; i--)
+//    {
+//        AdjustDown(tmp, k, i);//向下调整堆
+//    }
+//
+//    for (int i = k; i < arrSize; i++)
+//    {
+//        if (arr[i] < tmp[0])
+//        {
+//            tmp[0] = arr[i];
+//            AdjustDown(tmp, k, 0);
+//        }
+//    }
+//    *returnSize = k;
+//    return tmp;
+//}
+//
+//
+//int main()
+//{
+//	int arr[] = { 1,3,5,7,2,4,6,8 };
+//    int ret;
+//    int* retarr=smallestK(arr, sizeof(arr) / sizeof(int), 4, &ret);
+//
+//
+//	return 0;
+//}
 
 
-void swap(int* sum1, int* sum2)//交换堆中的两个数
-{
-    int tmp = *sum1;
-    *sum1 = *sum2;
-    *sum2 = tmp;
-}
-
-void AdjustDown(int* arr, int k, int root)//向下调整算法  k为堆的元素个数  root为从那个根结点开始调
-{
-    int parent = root;
-    int child = parent * 2 + 1;
-
-    while (child < k)
-    {
-        if ((child + 1) < k && arr[child + 1] > arr[child] )
-        {
-            child++;
-        }
-        if (arr[child] > arr[parent])
-        {
-            swap(&(arr[child]), &(arr[parent]));
-            parent = child;
-            child = parent * 2 + 1;
-        }
-        else
-        {
-            break;
-        }
-    }
-
-}
-
-/**
- * Note: The returned array must be malloced, assume caller calls free().
- */
-int* smallestK(int* arr, int arrSize, int k, int* returnSize)//建大堆
-{
-    if (k == 0)
-    {
-        *returnSize = 0;
-        return NULL;
-    }
-    int* tmp = (int*)malloc(sizeof(int) * k);//开辟k个空间的数组     tmp为大堆
-    if (tmp == NULL)
-    {
-        printf("开辟失败\n");
-        exit(-1);
-    }
-
-    memcpy(tmp, arr, sizeof(int) * k);
-
-    for (int i = (k - 1 - 1) / 2; i >= 0; i--)
-    {
-        AdjustDown(tmp, k, i);//向下调整堆
-    }
-
-    for (int i = k; i < arrSize; i++)
-    {
-        if (arr[i] < tmp[0])
-        {
-            tmp[0] = arr[i];
-            AdjustDown(tmp, k, 0);
-        }
-    }
-    *returnSize = k;
-    return tmp;
-}
-
-
-int main()
-{
-	int arr[] = { 1,3,5,7,2,4,6,8 };
-    int ret;
-    int* retarr=smallestK(arr, sizeof(arr) / sizeof(int), 4, &ret);
-
-
-	return 0;
-}
