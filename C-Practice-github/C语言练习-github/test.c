@@ -1523,3 +1523,35 @@
 //}
 
 
+#include<stdio.h>
+
+int BinarySearch(int* arr, int sz, int x)
+{
+	int head = 0;
+	int tail = sz - 1;
+	while (head <= tail)
+	{
+		int mid = (head + tail) / 2;
+		if (arr[mid] > x)
+		{
+			tail = mid - 1;
+		}
+		else if (arr[mid] < x)
+		{
+			head = mid + 1;
+		}
+		else
+		{
+			return mid;
+		}
+	}
+}
+
+int main()
+{
+	int arr[] = { 1,3,5,6 };
+	int ret = BinarySearch(arr, sizeof(arr) / sizeof(int), 6);
+	printf("%d\n", ret);
+
+	return 0;
+}
