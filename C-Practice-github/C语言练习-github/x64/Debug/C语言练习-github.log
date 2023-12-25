@@ -1,6 +1,39 @@
 ﻿cl : 命令行  warning D9025: 正在重写“/sdl”(用“/GS-”)
   test.c
-D:\github\C-Language-Practice\C-Practice-github\C语言练习-github\test.c(2231,15): warning C4477: “scanf”: 格式字符串“%d”需要类型“int *”的参数，但可变参数 1 拥有了类型“int”
-D:\github\C-Language-Practice\C-Practice-github\C语言练习-github\test.c(2228,5): warning C4996: 'scanf': This function or variable may be unsafe. Consider using scanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-D:\github\C-Language-Practice\C-Practice-github\C语言练习-github\test.c(2231,9): warning C4996: 'scanf': This function or variable may be unsafe. Consider using scanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+D:\github\C-Language-Practice\C-Practice-github\C语言练习-github\test.c(2545,9): warning C4477: “printf”: 格式字符串“%d”需要类型“int”的参数，但可变参数 1 拥有了类型“size_t”
+  D:\github\C-Language-Practice\C-Practice-github\C语言练习-github\test.c(2545,9):
+  请考虑在格式字符串中使用“%zd”
+  
+D:\github\C-Language-Practice\C-Practice-github\C语言练习-github\test.c(2546,9): warning C4477: “printf”: 格式字符串“%d”需要类型“int”的参数，但可变参数 1 拥有了类型“size_t”
+  D:\github\C-Language-Practice\C-Practice-github\C语言练习-github\test.c(2546,9):
+  请考虑在格式字符串中使用“%zd”
+  
+D:\github\C-Language-Practice\C-Practice-github\C语言练习-github\test.c(2547,9): warning C4477: “printf”: 格式字符串“%d”需要类型“int”的参数，但可变参数 1 拥有了类型“size_t”
+  D:\github\C-Language-Practice\C-Practice-github\C语言练习-github\test.c(2547,9):
+  请考虑在格式字符串中使用“%zd”
+  
+D:\github\C-Language-Practice\C-Practice-github\C语言练习-github\test.c(2548,9): warning C4477: “printf”: 格式字符串“%d”需要类型“int”的参数，但可变参数 1 拥有了类型“size_t”
+  D:\github\C-Language-Practice\C-Practice-github\C语言练习-github\test.c(2548,9):
+  请考虑在格式字符串中使用“%zd”
+  
+D:\github\C-Language-Practice\C-Practice-github\C语言练习-github\test.c(2549,9): warning C4477: “printf”: 格式字符串“%d”需要类型“int”的参数，但可变参数 1 拥有了类型“size_t”
+  D:\github\C-Language-Practice\C-Practice-github\C语言练习-github\test.c(2549,9):
+  请考虑在格式字符串中使用“%zd”
+  
+D:\github\C-Language-Practice\C-Practice-github\C语言练习-github\test.c(2550,9): warning C4477: “printf”: 格式字符串“%d”需要类型“int”的参数，但可变参数 1 拥有了类型“size_t”
+  D:\github\C-Language-Practice\C-Practice-github\C语言练习-github\test.c(2550,9):
+  请考虑在格式字符串中使用“%zd”
+  
+D:\github\C-Language-Practice\C-Practice-github\C语言练习-github\test.c(2551,9): warning C4477: “printf”: 格式字符串“%d”需要类型“int”的参数，但可变参数 1 拥有了类型“size_t”
+  D:\github\C-Language-Practice\C-Practice-github\C语言练习-github\test.c(2551,9):
+  请考虑在格式字符串中使用“%zd”
+  
+D:\github\C-Language-Practice\C-Practice-github\C语言练习-github\test.c(2552,9): warning C4477: “printf”: 格式字符串“%d”需要类型“int”的参数，但可变参数 1 拥有了类型“size_t”
+  D:\github\C-Language-Practice\C-Practice-github\C语言练习-github\test.c(2552,9):
+  请考虑在格式字符串中使用“%zd”
+  
+D:\github\C-Language-Practice\C-Practice-github\C语言练习-github\test.c(2553,9): warning C4477: “printf”: 格式字符串“%d”需要类型“int”的参数，但可变参数 1 拥有了类型“size_t”
+  D:\github\C-Language-Practice\C-Practice-github\C语言练习-github\test.c(2553,9):
+  请考虑在格式字符串中使用“%zd”
+  
   C语言练习-github.vcxproj -> D:\github\C-Language-Practice\C-Practice-github\x64\Debug\C语言练习-github.exe
