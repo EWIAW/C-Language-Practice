@@ -2555,8 +2555,75 @@
 
 #include<stdio.h>
 
+void Swap(int* num1, int* num2)//用于交换数组中的两个数
+{
+	int tmp = *num1;
+	*num1 = *num2;
+	*num2 = tmp;
+}
+
+void Print(int* arr, int sz)
+{
+	for (int i = 0; i < sz; i++)
+	{
+		printf("%d ", arr[i]);
+	}
+	printf("\n");
+}
+
+//一趟快速排序，左右指针法，其中begin为待排数组的第一个元素，end为数组的最后一个元素
+int PartSort1(int* arr, int begin, int end)
+{
+	int key = arr[end];//取最后一个数作为基准值key
+
+	int left = begin;//左指针起始位置
+	int right = end;//右指针起始位置
+
+	while (left < right)//当左指针在右指针的左边，即区间还有效
+	{
+		while (left < right && arr[left] <= key)//左指针往右找大
+		{
+			left++;
+		}
+
+		while (left < right && arr[right] >= key)//右指针往左找小
+		{
+			right--;
+		}
+
+		Swap(&arr[left], &arr[right]);//交换左右指针的值
+
+	}
+
+	Swap(&arr[left], &arr[end]);//将基准值key换到中间
+
+	return left;//返回中间的位置
+
+}
+
+void QuickSort(int* arr, int begin,int end)//快速排序递归实现
+{
+	if (begin >= end)//当待排区间不合法时，返回
+	{
+		return;
+	}
+
+	int div = PartSort1(arr, begin, end);
+	//一趟快速排序完成后[begin,div-1] div [div+1,end]  div为已经排完的位置，后面只需要排[begin,div-1] 和 [div+1,end]区间即可
+
+	QuickSort(arr, begin, div - 1);//排[begin,div-1]区间
+	QuickSort(arr, div + 1, end);//排[div+1,end]区间
+
+}
+
 int main()
 {
+
+	int arr[] = { 4,5,8,6,2,1,596,14,6 };
+
+	Print(arr, sizeof(arr) / sizeof(int));
+	QuickSort(arr, 0, sizeof(arr) / sizeof(int) - 1);
+	Print(arr, sizeof(arr) / sizeof(int));
 
 	return 0;
 }
