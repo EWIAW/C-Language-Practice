@@ -2571,9 +2571,38 @@ void Print(int* arr, int sz)
 	printf("\n");
 }
 
+//用于快速排序  的  三数取中（即在begin、end和 (begin+end)/2之间取一个处在中间的值，这样保证在一趟排序中，key值不会是最大，也不会是最小
+int GetMidIndex(int* arr, int begin, int end)
+{
+	int mid = (begin + end) / 2;
+	if (arr[begin] > arr[mid])
+	{
+		if (arr[begin] > arr[end])
+		{
+			return arr[mid] > arr[end] ? mid : end;
+		}
+	}
+	else if (arr[mid] > arr[end])
+	{
+		if (arr[mid] > arr[begin])
+		{
+			return arr[end] > arr[begin] ? end : begin;
+		}
+	}
+	else
+	{
+		return arr[begin] > arr[mid] ? begin : mid;
+	}
+	//返回的是 中间的数 的下标
+}
+
 //一趟快速排序，左右指针法，其中begin为待排数组的第一个元素，end为数组的最后一个元素
 int PartSort1(int* arr, int begin, int end)
 {
+
+	int mid = GetMidIndex(arr, begin, end);
+	Swap(&arr[mid], &arr[end]);
+
 	int key = arr[end];//取最后一个数作为基准值key
 
 	int left = begin;//左指针起始位置
@@ -2601,6 +2630,60 @@ int PartSort1(int* arr, int begin, int end)
 
 }
 
+int PartSort2(int* arr, int begin, int end)//挖坑法
+{
+	int key = arr[end];//选最后一个元素作为基准值key
+
+	int left = begin;//左指针指向第一个元素
+	int right = end;//右指针指向最后一个元素
+
+
+	while (left < right)
+	{
+		while (left < right && arr[left] <= key)//左指针往右找大填坑
+		{
+			left++;
+		}
+
+		arr[right] = arr[left];
+
+		while (left < right && arr[right] >= key)//右指针往右找小填坑
+		{
+			right--;
+		}
+
+		arr[left] = arr[right];
+
+	}
+
+	arr[left] = key;
+
+	return left;
+}
+
+int PartSort3(int* arr, int begin, int end)//前后指针法
+{
+	int key = arr[end];
+
+	int prev = begin - 1;//前指针
+	int tail = begin;//后指针
+
+	while (tail < end)
+	{
+		if (arr[tail] < key)
+		{
+			prev++;
+			Swap(&arr[prev], &arr[tail]);
+		}
+		tail++;
+	}
+
+	prev++;
+	Swap(&arr[prev], &arr[tail]);
+
+	return prev;
+}
+
 void QuickSort(int* arr, int begin,int end)//快速排序递归实现
 {
 	if (begin >= end)//当待排区间不合法时，返回
@@ -2611,6 +2694,8 @@ void QuickSort(int* arr, int begin,int end)//快速排序递归实现
 	int div = PartSort1(arr, begin, end);
 	//一趟快速排序完成后[begin,div-1] div [div+1,end]  div为已经排完的位置，后面只需要排[begin,div-1] 和 [div+1,end]区间即可
 
+	//Print(arr, end - begin + 1);
+
 	QuickSort(arr, begin, div - 1);//排[begin,div-1]区间
 	QuickSort(arr, div + 1, end);//排[div+1,end]区间
 
@@ -2620,6 +2705,7 @@ int main()
 {
 
 	int arr[] = { 4,5,8,6,2,1,596,14,6 };
+	//int arr[] = { 48,45,1,23,60,14 };
 
 	Print(arr, sizeof(arr) / sizeof(int));
 	QuickSort(arr, 0, sizeof(arr) / sizeof(int) - 1);
