@@ -2553,163 +2553,252 @@
 //	printf("%d\n", sizeof(&a[0] + 1));//12
 //}
 
-#include<stdio.h>
+//#include<stdio.h>
+//
+//void Swap(int* num1, int* num2)//用于交换数组中的两个数
+//{
+//	int tmp = *num1;
+//	*num1 = *num2;
+//	*num2 = tmp;
+//}
+//
+//void Print(int* arr, int sz)
+//{
+//	for (int i = 0; i < sz; i++)
+//	{
+//		printf("%d ", arr[i]);
+//	}
+//	printf("\n");
+//}
+//
+////用于快速排序  的  三数取中（即在begin、end和 (begin+end)/2之间取一个处在中间的值，这样保证在一趟排序中，key值不会是最大，也不会是最小
+//int GetMidIndex(int* arr, int begin, int end)
+//{
+//	int mid = (begin + end) / 2;
+//	if (arr[begin] > arr[mid])
+//	{
+//		if (arr[begin] > arr[end])
+//		{
+//			return arr[mid] > arr[end] ? mid : end;
+//		}
+//	}
+//	else if (arr[mid] > arr[end])
+//	{
+//		if (arr[mid] > arr[begin])
+//		{
+//			return arr[end] > arr[begin] ? end : begin;
+//		}
+//	}
+//	else
+//	{
+//		return arr[begin] > arr[mid] ? begin : mid;
+//	}
+//	//返回的是 中间的数 的下标
+//}
+//
+////一趟快速排序，左右指针法，其中begin为待排数组的第一个元素，end为数组的最后一个元素
+//int PartSort1(int* arr, int begin, int end)
+//{
+//
+//	int mid = GetMidIndex(arr, begin, end);
+//	Swap(&arr[mid], &arr[end]);
+//
+//	int key = arr[end];//取最后一个数作为基准值key
+//
+//	int left = begin;//左指针起始位置
+//	int right = end;//右指针起始位置
+//
+//	while (left < right)//当左指针在右指针的左边，即区间还有效
+//	{
+//		while (left < right && arr[left] <= key)//左指针往右找大
+//		{
+//			left++;
+//		}
+//
+//		while (left < right && arr[right] >= key)//右指针往左找小
+//		{
+//			right--;
+//		}
+//
+//		Swap(&arr[left], &arr[right]);//交换左右指针的值
+//
+//	}
+//
+//	Swap(&arr[left], &arr[end]);//将基准值key换到中间
+//
+//	return left;//返回中间的位置
+//}
+//
+//int PartSort2(int* arr, int begin, int end)//挖坑法
+//{
+//	int key = arr[end];//选最后一个元素作为基准值key
+//
+//	int left = begin;//左指针指向第一个元素
+//	int right = end;//右指针指向最后一个元素
+//
+//
+//	while (left < right)
+//	{
+//		while (left < right && arr[left] <= key)//左指针往右找大填坑
+//		{
+//			left++;
+//		}
+//
+//		arr[right] = arr[left];
+//
+//		while (left < right && arr[right] >= key)//右指针往右找小填坑
+//		{
+//			right--;
+//		}
+//
+//		arr[left] = arr[right];
+//
+//	}
+//
+//	arr[left] = key;
+//
+//	return left;
+//}
+//
+//int PartSort3(int* arr, int begin, int end)//前后指针法
+//{
+//	int key = arr[end];
+//
+//	int prev = begin - 1;//前指针
+//	int tail = begin;//后指针
+//
+//	while (tail < end)
+//	{
+//		if (arr[tail] < key)
+//		{
+//			prev++;
+//			Swap(&arr[prev], &arr[tail]);
+//		}
+//		tail++;
+//	}
+//
+//	prev++;
+//	Swap(&arr[prev], &arr[tail]);
+//
+//	return prev;
+//}
+//
+//void QuickSort(int* arr, int begin,int end)//快速排序递归实现
+//{
+//	if (begin >= end)//当待排区间不合法时，返回
+//	{
+//		return;
+//	}
+//
+//	int div = PartSort1(arr, begin, end);
+//	//一趟快速排序完成后[begin,div-1] div [div+1,end]  div为已经排完的位置，后面只需要排[begin,div-1] 和 [div+1,end]区间即可
+//
+//	//Print(arr, end - begin + 1);
+//
+//	QuickSort(arr, begin, div - 1);//排[begin,div-1]区间
+//	QuickSort(arr, div + 1, end);//排[div+1,end]区间
+//}
+//
+//void QuickSortNonR(int* arr, int begin, int end)//快速排序非递归实现
+//{
+//	int Stack[20] = { 0 };//创建一个栈区
+//	int size = 0;//栈区中的元素个数，同时能作为下标来用
+//
+//	//将区间[begin,end]入栈，注意！！！  先入右边，再入左边
+//	Stack[size] = end;
+//	size++;
+//
+//	Stack[size] = begin;
+//	size++;
+//
+//	//当栈不为空时
+//	while (size > 0)
+//	{
+//		//将左右出栈
+//		int left = Stack[size - 1];
+//		size--;
+//
+//		int right = Stack[size - 1];
+//		size--;
+//
+//		if (left < right)
+//		{
+//			int div = PartSort1(arr, left, right);
+//			//一趟排完后，区间分为[left,div-1] div [div+1,right]
+//			//将[left,div-1]  [div+1,right]入栈
+//			Stack[size] = right;
+//			size++;
+//
+//			Stack[size] = div + 1;
+//			size++;
+//
+//			Stack[size] = div - 1;
+//			size++;
+//
+//			Stack[size] = left;
+//			size++;
+//		}
+//	}
+//}
+//
+//int main()
+//{
+//	int arr1[] = { 4,5,8,6,2,1,596,14,6 };
+//	int arr2[] = { 48,45,1,23,60,14 };
+//
+//	Print(arr1, sizeof(arr1) / sizeof(int));
+//	QuickSort(arr1, 0, sizeof(arr1) / sizeof(int) - 1);
+//	Print(arr1, sizeof(arr1) / sizeof(int));
+//
+//	Print(arr2, sizeof(arr2) / sizeof(int));
+//	QuickSortNonR(arr2, 0, sizeof(arr2) / sizeof(int) - 1);
+//	Print(arr2, sizeof(arr2) / sizeof(int));
+//
+//	return 0;
+//}
 
-void Swap(int* num1, int* num2)//用于交换数组中的两个数
-{
-	int tmp = *num1;
-	*num1 = *num2;
-	*num2 = tmp;
-}
+//#include <stdio.h>
+//int main()
+//{
+//	char a = -1;
+//	signed char b = -1;
+//	unsigned char c = -1;
+//	printf("a=%d,b=%d,c=%d", a, b, c);
+//	return 0;
+//}
 
-void Print(int* arr, int sz)
-{
-	for (int i = 0; i < sz; i++)
-	{
-		printf("%d ", arr[i]);
-	}
-	printf("\n");
-}
+//#include <stdio.h>
+//int main()
+//{
+//	char a = -128;
+//	printf("%u\n", a);
+//	return 0;
+//}
 
-//用于快速排序  的  三数取中（即在begin、end和 (begin+end)/2之间取一个处在中间的值，这样保证在一趟排序中，key值不会是最大，也不会是最小
-int GetMidIndex(int* arr, int begin, int end)
-{
-	int mid = (begin + end) / 2;
-	if (arr[begin] > arr[mid])
-	{
-		if (arr[begin] > arr[end])
-		{
-			return arr[mid] > arr[end] ? mid : end;
-		}
-	}
-	else if (arr[mid] > arr[end])
-	{
-		if (arr[mid] > arr[begin])
-		{
-			return arr[end] > arr[begin] ? end : begin;
-		}
-	}
-	else
-	{
-		return arr[begin] > arr[mid] ? begin : mid;
-	}
-	//返回的是 中间的数 的下标
-}
+//#include <stdio.h>
+//int main()
+//{
+//	char a = 128;
+//	printf("%u\n", a);
+//	return 0;
+//}
+//
+//#include <stdio.h>
+//union Un1
+//{
+//	char c[5];
+//	int i;	
+//};
+//union Un2
+//{
+//	short c[7];
+//	int i;
+//};
+//int main()
+//{
+//	//下⾯输出的结果是什么？
+//	printf("%d\n", sizeof(union Un1));
+//	printf("%d\n", sizeof(union Un2));
+//	return 0;
+//}
 
-//一趟快速排序，左右指针法，其中begin为待排数组的第一个元素，end为数组的最后一个元素
-int PartSort1(int* arr, int begin, int end)
-{
-
-	int mid = GetMidIndex(arr, begin, end);
-	Swap(&arr[mid], &arr[end]);
-
-	int key = arr[end];//取最后一个数作为基准值key
-
-	int left = begin;//左指针起始位置
-	int right = end;//右指针起始位置
-
-	while (left < right)//当左指针在右指针的左边，即区间还有效
-	{
-		while (left < right && arr[left] <= key)//左指针往右找大
-		{
-			left++;
-		}
-
-		while (left < right && arr[right] >= key)//右指针往左找小
-		{
-			right--;
-		}
-
-		Swap(&arr[left], &arr[right]);//交换左右指针的值
-
-	}
-
-	Swap(&arr[left], &arr[end]);//将基准值key换到中间
-
-	return left;//返回中间的位置
-
-}
-
-int PartSort2(int* arr, int begin, int end)//挖坑法
-{
-	int key = arr[end];//选最后一个元素作为基准值key
-
-	int left = begin;//左指针指向第一个元素
-	int right = end;//右指针指向最后一个元素
-
-
-	while (left < right)
-	{
-		while (left < right && arr[left] <= key)//左指针往右找大填坑
-		{
-			left++;
-		}
-
-		arr[right] = arr[left];
-
-		while (left < right && arr[right] >= key)//右指针往右找小填坑
-		{
-			right--;
-		}
-
-		arr[left] = arr[right];
-
-	}
-
-	arr[left] = key;
-
-	return left;
-}
-
-int PartSort3(int* arr, int begin, int end)//前后指针法
-{
-	int key = arr[end];
-
-	int prev = begin - 1;//前指针
-	int tail = begin;//后指针
-
-	while (tail < end)
-	{
-		if (arr[tail] < key)
-		{
-			prev++;
-			Swap(&arr[prev], &arr[tail]);
-		}
-		tail++;
-	}
-
-	prev++;
-	Swap(&arr[prev], &arr[tail]);
-
-	return prev;
-}
-
-void QuickSort(int* arr, int begin,int end)//快速排序递归实现
-{
-	if (begin >= end)//当待排区间不合法时，返回
-	{
-		return;
-	}
-
-	int div = PartSort1(arr, begin, end);
-	//一趟快速排序完成后[begin,div-1] div [div+1,end]  div为已经排完的位置，后面只需要排[begin,div-1] 和 [div+1,end]区间即可
-
-	//Print(arr, end - begin + 1);
-
-	QuickSort(arr, begin, div - 1);//排[begin,div-1]区间
-	QuickSort(arr, div + 1, end);//排[div+1,end]区间
-
-}
-
-int main()
-{
-
-	int arr[] = { 4,5,8,6,2,1,596,14,6 };
-	//int arr[] = { 48,45,1,23,60,14 };
-
-	Print(arr, sizeof(arr) / sizeof(int));
-	QuickSort(arr, 0, sizeof(arr) / sizeof(int) - 1);
-	Print(arr, sizeof(arr) / sizeof(int));
-
-	return 0;
-}
