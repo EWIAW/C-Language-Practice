@@ -2802,3 +2802,164 @@
 //	return 0;
 //}
 
+//#include<stdio.h>
+//#include<ctype.h>
+//
+//int main()
+//{
+//
+//	int c;
+//	while ( (c = fgetc(stdin)) != EOF)
+//	{
+//		c = toupper(c);
+//		fputc(c, stdout);
+//	}
+//
+//	return 0;
+//}
+
+#include<stdio.h>
+#include<stdlib.h>
+
+void Print(int* arr, int sz)
+{
+	for (int i = 0; i < sz; i++)
+	{
+		printf("%d ", arr[i]);
+	}
+	printf("\n");
+}
+
+//单趟归并排序
+void MergeArr(int* arr, int* tmp, int left, int mid, int right)
+{
+	int begin1 = left;
+	int end1 = mid;
+	int begin2 = mid + 1;
+	int end2 = right;
+
+	int i = begin1;
+
+	while (begin1 <= end1 && begin2 <= end2)
+	{
+		if (arr[begin1] < arr[begin2])
+		{
+			tmp[i] = arr[begin1];
+			i++;
+			begin1++;
+		}
+		else
+		{
+			tmp[i] = arr[begin2];
+			i++;
+			begin2++;
+		}
+	}
+
+	while (begin1 <= end1)
+	{
+		tmp[i] = arr[begin1];
+		i++;
+		begin1++;
+	}
+
+	while (begin2 <= end2)
+	{
+		tmp[i] = arr[begin2];
+		i++;
+		begin2++;
+	}
+
+	//Print(tmp, 8);
+	for (int i = left; i <= right; i++)
+	{
+		arr[i] = tmp[i];
+	}
+
+}
+
+void MergePartSort(int* arr, int*tmp, int begin, int end)//归并排序分区间和归并
+{
+
+	if (begin >= end)
+	{
+		return;
+	}
+
+	//分区间
+	int mid = (begin + end) / 2;
+
+	MergePartSort(arr, tmp, begin, mid);
+	MergePartSort(arr, tmp, mid + 1, end);
+
+	//归并
+
+	MergeArr(arr, tmp, begin, mid, end);
+}
+
+void MergeSort(int* arr, int begin, int end)//归并排序
+{
+	int* tmp = (int*)malloc(sizeof(int) * (end - begin + 1));
+	if (tmp == NULL)
+	{
+		printf("malloc false\n");
+		exit(-1);
+	}
+
+	MergePartSort(arr, tmp, begin, end);
+
+	free(tmp);
+}
+
+void MergeSortNonR(int* arr, int begin, int end)//归并排序非递归实现
+{
+	int* tmp = (int*)malloc(sizeof(int) * (end - begin + 1));
+	if (tmp == NULL)
+	{
+		printf("malloc false\n");
+		exit(-1);
+	}
+
+	int gap = 1;
+
+	while (gap < (end - begin + 1))
+	{
+		for (int i = 0; i <= end; i = i + 2 * gap)
+		{
+			int left = i;
+			int right = i + 2 * gap - 1;
+			int mid = (right + left) / 2;
+			if (right > end)
+			{
+				right = end;
+			}
+
+			MergeArr(arr, tmp, left, mid, right);
+		}
+		//Print(arr, 12);
+
+		gap = gap * 2;
+	}
+
+}
+
+int main()
+{
+	//int arr[] = { 1,3,5,7,2,4,6,8 };
+	int arr[] = { 1,5,2,10,3,4,8,9,5,3,1,5 };
+	//int arr[] = { 1 };
+	//int arr[] = { 15,863,475,123,94, };
+	
+	//Print(arr, sizeof(arr) / sizeof(int));
+	//MergePartSort(arr, 0, 3, 7);
+	//Print(arr, sizeof(arr) / sizeof(int));
+
+	//MergeSort(arr, 0, sizeof(arr) / sizeof(int) - 1);
+
+	Print(arr, sizeof(arr) / sizeof(int));
+	MergeSortNonR(arr, 0, sizeof(arr) / sizeof(int) - 1);
+
+	Print(arr, sizeof(arr) / sizeof(int));
+
+	return 0;
+}
