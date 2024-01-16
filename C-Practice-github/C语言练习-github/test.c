@@ -2818,148 +2818,476 @@
 //	return 0;
 //}
 
-#include<stdio.h>
-#include<stdlib.h>
+//#include<stdio.h>
+//#include<stdlib.h>
+//
+//void Print(int* arr, int sz)
+//{
+//	for (int i = 0; i < sz; i++)
+//	{
+//		printf("%d ", arr[i]);
+//	}
+//	printf("\n");
+//}
+//
+////单趟归并排序
+//void MergeArr(int* arr, int* tmp, int left, int mid, int right)
+//{
+//	int begin1 = left;
+//	int end1 = mid;
+//	int begin2 = mid + 1;
+//	int end2 = right;
+//
+//	int i = begin1;
+//
+//	while (begin1 <= end1 && begin2 <= end2)
+//	{
+//		if (arr[begin1] < arr[begin2])
+//		{
+//			tmp[i] = arr[begin1];
+//			i++;
+//			begin1++;
+//		}
+//		else
+//		{
+//			tmp[i] = arr[begin2];
+//			i++;
+//			begin2++;
+//		}
+//	}
+//
+//	while (begin1 <= end1)
+//	{
+//		tmp[i] = arr[begin1];
+//		i++;
+//		begin1++;
+//	}
+//
+//	while (begin2 <= end2)
+//	{
+//		tmp[i] = arr[begin2];
+//		i++;
+//		begin2++;
+//	}
+//
+//	//Print(tmp, 8);
+//	for (int i = left; i <= right; i++)
+//	{
+//		arr[i] = tmp[i];
+//	}
+//
+//}
+//
+//void MergePartSort(int* arr, int*tmp, int begin, int end)//归并排序分区间和归并
+//{
+//
+//	if (begin >= end)
+//	{
+//		return;
+//	}
+//
+//	//分区间
+//	int mid = (begin + end) / 2;
+//
+//	MergePartSort(arr, tmp, begin, mid);
+//	MergePartSort(arr, tmp, mid + 1, end);
+//
+//	//归并
+//
+//	MergeArr(arr, tmp, begin, mid, end);
+//}
+//
+//void MergeSort(int* arr, int begin, int end)//归并排序
+//{
+//	int* tmp = (int*)malloc(sizeof(int) * (end - begin + 1));
+//	if (tmp == NULL)
+//	{
+//		printf("malloc false\n");
+//		exit(-1);
+//	}
+//
+//	MergePartSort(arr, tmp, begin, end);
+//
+//	free(tmp);
+//}
+//
+//void MergeSortNonR(int* arr, int begin, int end)//归并排序非递归实现
+//{
+//	int* tmp = (int*)malloc(sizeof(int) * (end - begin + 1));
+//	if (tmp == NULL)
+//	{
+//		printf("malloc false\n");
+//		exit(-1);
+//	}
+//
+//	int gap = 1;
+//
+//	while (gap < (end - begin + 1))
+//	{
+//		for (int i = 0; i <= end; i = i + 2 * gap)
+//		{
+//			int left = i;
+//			int right = i + 2 * gap - 1;
+//			int mid = (right + left) / 2;
+//			if (right > end)
+//			{
+//				right = end;
+//			}
+//
+//			MergeArr(arr, tmp, left, mid, right);
+//		}
+//		//Print(arr, 12);
+//
+//		gap = gap * 2;
+//	}
+//
+//}
+//
+//int main()
+//{
+//	//int arr[] = { 1,3,5,7,2,4,6,8 };
+//	int arr[] = { 1,5,2,10,3,4,8,9,5,3,1,5 };
+//	//int arr[] = { 1 };
+//	//int arr[] = { 15,863,475,123,94, };
+//	
+//	//Print(arr, sizeof(arr) / sizeof(int));
+//	//MergePartSort(arr, 0, 3, 7);
+//	//Print(arr, sizeof(arr) / sizeof(int));
+//
+//	//MergeSort(arr, 0, sizeof(arr) / sizeof(int) - 1);
+//
+//	Print(arr, sizeof(arr) / sizeof(int));
+//	MergeSortNonR(arr, 0, sizeof(arr) / sizeof(int) - 1);
+//
+//	Print(arr, sizeof(arr) / sizeof(int));
+//
+//	return 0;
+//}
 
-void Print(int* arr, int sz)
+
+//#include<stdio.h>
+//
+//typedef int(*p_fun)(int, int);
+//
+//int Add(int x, int y)
+//{
+//	return x + y;
+//}
+//
+//int main()
+//{
+//	printf("%p\n", Add);
+//	printf("%p\n", &Add);
+//
+//	int ret1 = Add(1, 2);
+//	printf("%d\n", ret1);
+//
+//	int (*pAdd)(int, int) = &Add;
+//
+//	p_fun pAdd2= &Add;
+//
+//
+//	int ret2 = pAdd(3, 5);
+//	printf("%d\n", ret2);
+//
+//	int ret3 = pAdd2(3, 5);
+//	printf("%d\n", ret3);
+//
+//
+//	return 0;
+//}
+//
+//#include<stdio.h>
+//
+//typedef int(*p_fun)(int, int);//使用typedef关键字简化代码长度
+//
+//int Add(int x, int y)
+//{
+//	return x + y;
+//}
+//
+//int main()
+//{
+//	int ret1 = Add(1, 2);
+//	printf("%d\n", ret1);//常规用法
+//
+//	int (*pAdd)(int, int) = &Add;//使用函数指针的用法
+//	int ret2 = pAdd(2, 3);
+//	printf("%d\n", ret2);
+//
+//	p_fun pAdd2 = &Add;//使用typedef的用法。
+//	int ret3 = pAdd2(3, 4);
+//	printf("%d\n", ret3);
+//
+//	return 0;
+//}
+
+
+//#include<stdio.h>
+//
+//int Add(int x, int y)
+//{
+//	return x + y;
+//}
+//
+//int Sub(int x, int y)
+//{
+//	return x - y;
+//}
+//
+//int Mul(int x, int y)
+//{
+//	return x * y;
+//}
+//
+//int Div(int x, int y)
+//{
+//	return x / y;
+//}
+//
+//void menu()
+//{
+//	printf("		1.加法  2.减法	 \n");
+//	printf("		3.乘法  4.除法	 \n");
+//	printf("		  0.退出程序  	 \n");
+//}
+//
+//int main()
+//{
+//	int input = 0;
+//	int x, y;
+//	do
+//	{
+//		menu();
+//		printf("请输入操作：");
+//		scanf("%d", &input);
+//
+//		switch (input)
+//		{
+//		case 1:
+//			printf("请输入两个数：");
+//			scanf("%d %d", &x, &y);
+//			int ret = Add(x, y);
+//			printf("%d\n", ret);
+//			break;
+//		case 2:
+//			printf("请输入两个数：");
+//			scanf("%d %d", &x, &y);
+//			ret = Sub(x, y);
+//			printf("%d\n", ret);
+//			break;
+//		case 3:
+//			printf("请输入两个数：");
+//			scanf("%d %d", &x, &y);
+//			ret = Mul(x, y);
+//			printf("%d\n", ret);
+//			break;
+//		case 4:
+//			printf("请输入两个数：");
+//			scanf("%d %d", &x, &y);
+//			ret = Div(x, y);
+//			printf("%d\n", ret);
+//			break;
+//		case 0:
+//			break;
+//		default:
+//			printf("输入错误，请重新输入\n");
+//			continue;
+//		}
+//
+//	} while (input);
+//	return 0;
+//}
+
+
+//#include<stdio.h>
+//
+//int Add(int x, int y)
+//{
+//	return x + y;
+//}
+//
+//int Sub(int x, int y)
+//{
+//	return x - y;
+//}
+//
+//int Mul(int x, int y)
+//{
+//	return x * y;
+//}
+//
+//int Div(int x, int y)
+//{
+//	return x / y;
+//}
+//
+//void menu()
+//{
+//	printf("		1.加法  2.减法	 \n");
+//	printf("		3.乘法  4.除法	 \n");
+//	printf("		  0.退出程序  	 \n");
+//}
+//
+//int main()
+//{
+//	int (*parr[4])(int, int) = { &Add,&Sub,&Mul,&Div };
+//	int input = 0;
+//	do
+//	{
+//		menu();
+//		printf("请输入你的操作：");
+//		scanf("%d", &input);
+//
+//		if (input == 0)
+//		{
+//			break;
+//		}
+//		else if (input >= 1 && input <= 4)
+//		{
+//			int x, y;
+//			printf("请输入两个数：");
+//			scanf("%d %d", &x, &y);
+//			int ret = parr[input - 1](x, y);
+//			printf("%d\n", ret);
+//		}
+//		else
+//		{
+//			printf("输入错误，请重新输入\n");
+//		}
+//
+//	} while (input);
+//
+//	return 0;
+//}
+//
+//#include<stdio.h>
+//
+//int Compare(void* p1, void* p2)//用于qsort函数的比较函数
+//{
+//	return *(int*)p1 - *(int*)p2;
+//}
+//
+//void Print(int* parr, int sz)//打印数组
+//{
+//	for (int i = 0; i < sz; i++)
+//	{
+//		printf("%d ", parr[i]);
+//	}
+//	printf("\n");
+//}
+//
+//int main()
+//{
+//	int arr[] = { 10,8,6,47,52,10,23,69,74 };
+//	Print(arr, sizeof(arr) / sizeof(arr[0]));
+//
+//	qsort(arr, sizeof(arr) / sizeof(arr[0]), sizeof(arr[0]), Compare);//使用qsort函数对数组进行排序
+//	Print(arr, sizeof(arr) / sizeof(arr[0]));
+//
+//	return 0;
+//}
+
+
+
+
+
+
+
+
+//#include<stdio.h>
+//
+//typedef struct Stu
+//{
+//	char name[20];
+//	int age;
+//}Stu;
+//
+//int Compare1(void* p1, void* p2)
+//{
+//	return (*(Stu*)p1).age - (*(Stu*)p2).age;
+//}
+//
+//int Compare2(void* p1, void* p2)
+//{
+//	return strcmp((*(Stu*)p1).name, (*(Stu*)p2).name);
+//}
+//
+//int main()
+//{
+//	Stu arr[] = { {"张三",18}, {"李四",20},{"王五",19} };
+//	for (int i = 0; i < sizeof(arr) / sizeof(arr[0]); i++)
+//	{
+//		printf("%s %d\n", arr[i].name, arr[i].age);
+//	}
+//
+//	qsort(arr, sizeof(arr) / sizeof(arr[0]), sizeof(arr[0]), Compare2);
+//
+//	for (int i = 0; i < sizeof(arr) / sizeof(arr[0]); i++)
+//	{
+//		printf("%s %d\n", arr[i].name, arr[i].age);
+//	}
+//
+//	return 0;
+//}
+
+
+
+
+
+
+
+
+#include<stdio.h>
+
+void Print(int* parr, int sz)//打印数组
 {
 	for (int i = 0; i < sz; i++)
 	{
-		printf("%d ", arr[i]);
+		printf("%d ", parr[i]);
 	}
 	printf("\n");
 }
 
-//单趟归并排序
-void MergeArr(int* arr, int* tmp, int left, int mid, int right)
+void Swap(void* p1, void* p2, int sz)
 {
-	int begin1 = left;
-	int end1 = mid;
-	int begin2 = mid + 1;
-	int end2 = right;
-
-	int i = begin1;
-
-	while (begin1 <= end1 && begin2 <= end2)
+	for (int i = 0; i < sz; i++)
 	{
-		if (arr[begin1] < arr[begin2])
-		{
-			tmp[i] = arr[begin1];
-			i++;
-			begin1++;
-		}
-		else
-		{
-			tmp[i] = arr[begin2];
-			i++;
-			begin2++;
-		}
+		char tmp = *((char*)p1 + i);
+		*((char*)p1 + i) = *((char*)p2 + i);
+		*((char*)p2 + i) = tmp;
 	}
-
-	while (begin1 <= end1)
-	{
-		tmp[i] = arr[begin1];
-		i++;
-		begin1++;
-	}
-
-	while (begin2 <= end2)
-	{
-		tmp[i] = arr[begin2];
-		i++;
-		begin2++;
-	}
-
-	//Print(tmp, 8);
-	for (int i = left; i <= right; i++)
-	{
-		arr[i] = tmp[i];
-	}
-
 }
 
-void MergePartSort(int* arr, int*tmp, int begin, int end)//归并排序分区间和归并
+int Compare(void* p1, void* p2)
 {
-
-	if (begin >= end)
-	{
-		return;
-	}
-
-	//分区间
-	int mid = (begin + end) / 2;
-
-	MergePartSort(arr, tmp, begin, mid);
-	MergePartSort(arr, tmp, mid + 1, end);
-
-	//归并
-
-	MergeArr(arr, tmp, begin, mid, end);
+	return *(int*)p1 - *(int*)p2;
 }
 
-void MergeSort(int* arr, int begin, int end)//归并排序
-{
-	int* tmp = (int*)malloc(sizeof(int) * (end - begin + 1));
-	if (tmp == NULL)
+void Bubble_Sort(void* arr, int num, int sz, int (*Compare)(void*, void*))
+{	
+	for (int i = num; i > 0; i--)
 	{
-		printf("malloc false\n");
-		exit(-1);
-	}
-
-	MergePartSort(arr, tmp, begin, end);
-
-	free(tmp);
-}
-
-void MergeSortNonR(int* arr, int begin, int end)//归并排序非递归实现
-{
-	int* tmp = (int*)malloc(sizeof(int) * (end - begin + 1));
-	if (tmp == NULL)
-	{
-		printf("malloc false\n");
-		exit(-1);
-	}
-
-	int gap = 1;
-
-	while (gap < (end - begin + 1))
-	{
-		for (int i = 0; i <= end; i = i + 2 * gap)
+		for (int j = 0; j < i - 1; j++)
 		{
-			int left = i;
-			int right = i + 2 * gap - 1;
-			int mid = (right + left) / 2;
-			if (right > end)
+			if (Compare((char*)(arr)+j * sz, (char*)(arr)+(j + 1) * sz)>0)
 			{
-				right = end;
+				Swap((char*)(arr)+j * sz, (char*)(arr)+(j + 1) * sz, sz);
 			}
-
-			MergeArr(arr, tmp, left, mid, right);
 		}
-		//Print(arr, 12);
-
-		gap = gap * 2;
 	}
-
 }
 
 int main()
 {
-	//int arr[] = { 1,3,5,7,2,4,6,8 };
-	int arr[] = { 1,5,2,10,3,4,8,9,5,3,1,5 };
-	//int arr[] = { 1 };
-	//int arr[] = { 15,863,475,123,94, };
+	int arr[] = { 10,8,6,47,52,10,23,69,74 };
+	Print(arr, sizeof(arr) / sizeof(arr[0]));
+
+	int sz = sizeof(arr) / sizeof(arr[0]);
 	
-	//Print(arr, sizeof(arr) / sizeof(int));
-	//MergePartSort(arr, 0, 3, 7);
-	//Print(arr, sizeof(arr) / sizeof(int));
+	Bubble_Sort(arr, sz, sizeof(arr[0]), Compare);
 
-	//MergeSort(arr, 0, sizeof(arr) / sizeof(int) - 1);
-
-	Print(arr, sizeof(arr) / sizeof(int));
-	MergeSortNonR(arr, 0, sizeof(arr) / sizeof(int) - 1);
-
-	Print(arr, sizeof(arr) / sizeof(int));
+	Print(arr, sizeof(arr) / sizeof(arr[0]));
 
 	return 0;
 }
