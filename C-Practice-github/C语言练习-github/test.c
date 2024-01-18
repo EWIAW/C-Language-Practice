@@ -3240,16 +3240,13 @@
 
 #include<stdio.h>
 
-void Print(int* parr, int sz)//打印数组
+typedef struct Stu
 {
-	for (int i = 0; i < sz; i++)
-	{
-		printf("%d ", parr[i]);
-	}
-	printf("\n");
-}
+	char name[20];
+	int age;
+}Stu;
 
-void Swap(void* p1, void* p2, int sz)
+void Swap(void* p1, void* p2, int sz)//交换函数，一个字节一个字节的交换
 {
 	for (int i = 0; i < sz; i++)
 	{
@@ -3259,12 +3256,7 @@ void Swap(void* p1, void* p2, int sz)
 	}
 }
 
-int Compare(void* p1, void* p2)
-{
-	return *(int*)p1 - *(int*)p2;
-}
-
-void Bubble_Sort(void* arr, int num, int sz, int (*Compare)(void*, void*))
+void Bubble_Sort(void* arr, int num, int sz, int (*Compare)(void*, void*))//使用冒泡排序模拟回调函数
 {	
 	for (int i = num; i > 0; i--)
 	{
@@ -3278,16 +3270,32 @@ void Bubble_Sort(void* arr, int num, int sz, int (*Compare)(void*, void*))
 	}
 }
 
+int Compare1(void* p1, void* p2)//按年龄来排序
+{
+	return ((Stu*)p1)->age - ((Stu*)p1)->age;
+}
+
+int Compare2(void* p1, void* p2)//按名字来排序
+{
+	return strcmp(((Stu*)p1)->name, ((Stu*)p2)->name);
+}
+
 int main()
 {
-	int arr[] = { 10,8,6,47,52,10,23,69,74 };
-	Print(arr, sizeof(arr) / sizeof(arr[0]));
+	Stu arr[] = { {"张三",18},{"李四",19},{"王五",20} };
+	int num = sizeof(arr) / sizeof(arr[0]);
 
-	int sz = sizeof(arr) / sizeof(arr[0]);
-	
-	Bubble_Sort(arr, sz, sizeof(arr[0]), Compare);
+	for (int i = 0; i < num; i++)
+	{
+		printf("%s %d\n", arr[i].name, arr[i].age);
+	}
 
-	Print(arr, sizeof(arr) / sizeof(arr[0]));
+	Bubble_Sort(arr, num, sizeof(arr[0]), Compare2);
+
+	for (int i = 0; i < num; i++)
+	{
+		printf("%s %d\n", arr[i].name, arr[i].age);
+	}
 
 	return 0;
 }
