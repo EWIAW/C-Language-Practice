@@ -3238,64 +3238,113 @@
 
 
 
+//#include<stdio.h>
+//
+//typedef struct Stu
+//{
+//	char name[20];
+//	int age;
+//}Stu;
+//
+//void Swap(void* p1, void* p2, int sz)//交换函数，一个字节一个字节的交换
+//{
+//	for (int i = 0; i < sz; i++)
+//	{
+//		char tmp = *((char*)p1 + i);
+//		*((char*)p1 + i) = *((char*)p2 + i);
+//		*((char*)p2 + i) = tmp;
+//	}
+//}
+//
+//void Bubble_Sort(void* arr, int num, int sz, int (*Compare)(void*, void*))//使用冒泡排序模拟回调函数
+//{	
+//	for (int i = num; i > 0; i--)
+//	{
+//		for (int j = 0; j < i - 1; j++)
+//		{
+//			if (Compare((char*)(arr)+j * sz, (char*)(arr)+(j + 1) * sz)>0)
+//			{
+//				Swap((char*)(arr)+j * sz, (char*)(arr)+(j + 1) * sz, sz);
+//			}
+//		}
+//	}
+//}
+//
+//int Compare1(void* p1, void* p2)//按年龄来排序
+//{
+//	return ((Stu*)p1)->age - ((Stu*)p1)->age;
+//}
+//
+//int Compare2(void* p1, void* p2)//按名字来排序
+//{
+//	return strcmp(((Stu*)p1)->name, ((Stu*)p2)->name);
+//}
+//
+//int main()
+//{
+//	Stu arr[] = { {"张三",18},{"李四",19},{"王五",20} };
+//	int num = sizeof(arr) / sizeof(arr[0]);
+//
+//	for (int i = 0; i < num; i++)
+//	{
+//		printf("%s %d\n", arr[i].name, arr[i].age);
+//	}
+//
+//	Bubble_Sort(arr, num, sizeof(arr[0]), Compare2);
+//
+//	for (int i = 0; i < num; i++)
+//	{
+//		printf("%s %d\n", arr[i].name, arr[i].age);
+//	}
+//
+//	return 0;
+//}
+
+//
+//#include<stdio.h>
+//
+//typedef struct Stu
+//{
+//	char name[20];
+//	int age;
+//}Stu;
+//
+//int  main()
+//{
+//
+//	Stu a = { "张三",18 };
+//
+//	printf("%s %d\n", a.name, a.age);
+//
+//	char tmp[100];
+//
+//	sprintf(tmp, "%s %d", a.name, a.age);
+//
+//	printf("%s\n", tmp);
+//
+//	return 0;
+//}
+
+
 #include<stdio.h>
-
-typedef struct Stu
-{
-	char name[20];
-	int age;
-}Stu;
-
-void Swap(void* p1, void* p2, int sz)//交换函数，一个字节一个字节的交换
-{
-	for (int i = 0; i < sz; i++)
-	{
-		char tmp = *((char*)p1 + i);
-		*((char*)p1 + i) = *((char*)p2 + i);
-		*((char*)p2 + i) = tmp;
-	}
-}
-
-void Bubble_Sort(void* arr, int num, int sz, int (*Compare)(void*, void*))//使用冒泡排序模拟回调函数
-{	
-	for (int i = num; i > 0; i--)
-	{
-		for (int j = 0; j < i - 1; j++)
-		{
-			if (Compare((char*)(arr)+j * sz, (char*)(arr)+(j + 1) * sz)>0)
-			{
-				Swap((char*)(arr)+j * sz, (char*)(arr)+(j + 1) * sz, sz);
-			}
-		}
-	}
-}
-
-int Compare1(void* p1, void* p2)//按年龄来排序
-{
-	return ((Stu*)p1)->age - ((Stu*)p1)->age;
-}
-
-int Compare2(void* p1, void* p2)//按名字来排序
-{
-	return strcmp(((Stu*)p1)->name, ((Stu*)p2)->name);
-}
 
 int main()
 {
-	Stu arr[] = { {"张三",18},{"李四",19},{"王五",20} };
-	int num = sizeof(arr) / sizeof(arr[0]);
-
-	for (int i = 0; i < num; i++)
+	FILE* pf = fopen("test.txt", "w");
+	if (pf == NULL)
 	{
-		printf("%s %d\n", arr[i].name, arr[i].age);
+		printf("打开文件失败\n");
 	}
 
-	Bubble_Sort(arr, num, sizeof(arr[0]), Compare2);
+	fputs("helloaaaaaaa", pf);
 
-	for (int i = 0; i < num; i++)
-	{
-		printf("%s %d\n", arr[i].name, arr[i].age);
-	}
+	fseek(pf, 3, SEEK_SET);
+
+	fputs("11111111", pf);
+
+	fclose(pf);
+
+
 
 	return 0;
 }
