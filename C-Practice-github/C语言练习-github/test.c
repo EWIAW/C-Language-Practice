@@ -3391,38 +3391,38 @@
 //	return 0;
 //}
 
-#include<stdio.h>
-
-typedef struct Stu
-{
-	char name[20];
-	int age;
-}Stu;
-
-int main()
-{
-	FILE* pf = fopen("test.txt", "r");//以读的形式打开文件
-	if (pf == NULL)
-	{
-		printf("打开文件失败\n");
-		exit(-1);
-	}
-
-	Stu arr[2];
-	int sz = sizeof(arr) / sizeof(arr[0]);
-	for (int i = 0; i < sz; i++)//将文件中的信息读入到arr数组中
-	{
-		fscanf(pf, "%s %d", &arr[i].name, &arr[i].age);
-	}
-
-	for (int i = 0; i < sz; i++)//输出arr数组
-	{
-		printf("%s %d\n", arr[i].name, arr[i].age);
-	}
-
-	fclose(pf);//关闭文件
-	return 0;
-}
+//#include<stdio.h>
+//
+//typedef struct Stu
+//{
+//	char name[20];
+//	int age;
+//}Stu;
+//
+//int main()
+//{
+//	FILE* pf = fopen("test.txt", "r");//以读的形式打开文件
+//	if (pf == NULL)
+//	{
+//		printf("打开文件失败\n");
+//		exit(-1);
+//	}
+//
+//	Stu arr[2];
+//	int sz = sizeof(arr) / sizeof(arr[0]);
+//	for (int i = 0; i < sz; i++)//将文件中的信息读入到arr数组中
+//	{
+//		fscanf(pf, "%s %d", &arr[i].name, &arr[i].age);
+//	}
+//
+//	for (int i = 0; i < sz; i++)//输出arr数组
+//	{
+//		printf("%s %d\n", arr[i].name, arr[i].age);
+//	}
+//
+//	fclose(pf);//关闭文件
+//	return 0;
+//}
 
 //#include<stdio.h>
 //
@@ -3452,3 +3452,42 @@ int main()
 //
 //	return 0;
 //}
+
+//#include<stdio.h>
+//
+//int main()
+//{
+//	FILE* pf = fopen("test.txt", "w");
+//	if (pf == NULL)
+//	{
+//		printf("打开文件失败\n");
+//		exit(-1);
+//	}
+//
+//	fputs("hello world", pf);
+//
+//	fseek(pf, 3, SEEK_SET);
+//	fputs("aaa", pf);
+//
+//	fclose(pf);
+//	return 0;
+//}
+
+#include<stdio.h>
+
+int main()
+{
+	FILE* pf = fopen("test.txt", "w");
+	if (pf == NULL)
+	{
+		printf("打开文件失败\n");
+		exit(-1);
+	}
+
+	fputs("hello world", pf);
+	int ret = ftell(pf);
+	printf("%d\n", ret);
+
+	fclose(pf);
+	return 0;
+}
