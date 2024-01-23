@@ -3326,25 +3326,129 @@
 //}
 
 
+//#include<stdio.h>
+//int main()
+//{
+//	FILE* pf = fopen("test.txt", "w");//以写的形式打开文件
+//	if (pf == NULL)//检查文件是否打开成功
+//	{
+//		printf("打开文件失败\n");
+//		exit(-1);
+//	}
+//
+//	char arr[20] = "hello world";
+//	fputs(arr, pf);
+//
+//	fclose(pf);//关闭文件
+//	return 0;
+//}
+
+
+//#include<stdio.h>
+//int main()
+//{
+//	FILE* pf = fopen("test.txt", "r");//以读的形式打开文件
+//	if (pf == NULL)
+//	{
+//		printf("打开文件失败\n");
+//		exit(-1);
+//	}
+//	char arr[20];
+//	fgets(arr, 100, pf);
+//	printf("%s\n", arr);
+//
+//	fclose(pf);
+//	return 0;
+//}
+
+
+//
+//#include<stdio.h>
+//
+//typedef struct Stu
+//{
+//	char name[20];
+//	int age;
+//}Stu;
+//
+//int main()
+//{
+//	Stu arr[] = { {"张三",18},{"李四",20} };
+//	FILE* pf = fopen("test.txt", "w");//以写的形式打开文件
+//	if (pf == NULL)//判断文件是否打开成功
+//	{
+//		printf("打开文件失败\n");
+//		exit(-1);
+//	}
+//
+//	int sz = sizeof(arr) / sizeof(arr[0]);//arr数组的元素个数
+//	for (int i = 0; i < sz; i++)
+//	{
+//		fprintf(pf, "%s %d\n", arr[i].name, arr[i].age);//把Stu数组中的数据写入到外存中
+//	}
+//
+//	fclose(pf);//关闭文件
+//	return 0;
+//}
+
 #include<stdio.h>
+
+typedef struct Stu
+{
+	char name[20];
+	int age;
+}Stu;
 
 int main()
 {
-	FILE* pf = fopen("test.txt", "w");
+	FILE* pf = fopen("test.txt", "r");//以读的形式打开文件
 	if (pf == NULL)
 	{
 		printf("打开文件失败\n");
+		exit(-1);
 	}
 
-	fputs("helloaaaaaaa", pf);
+	Stu arr[2];
+	int sz = sizeof(arr) / sizeof(arr[0]);
+	for (int i = 0; i < sz; i++)//将文件中的信息读入到arr数组中
+	{
+		fscanf(pf, "%s %d", &arr[i].name, &arr[i].age);
+	}
 
-	fseek(pf, 3, SEEK_SET);
+	for (int i = 0; i < sz; i++)//输出arr数组
+	{
+		printf("%s %d\n", arr[i].name, arr[i].age);
+	}
 
-	fputs("11111111", pf);
-
-	fclose(pf);
-
-
-
+	fclose(pf);//关闭文件
 	return 0;
 }
+
+//#include<stdio.h>
+//
+//int main()
+//{
+//	FILE* pf1 = fopen("test.txt", "w");//使用fopen函数来打开文件
+//	if (pf1 == NULL)
+//	{
+//		printf("打开文件失败\n");
+//		exit(-1);	
+//	}
+//	fputs("hello world", pf1);
+//	fclose(pf1);//使用fclose函数来关闭文件
+//
+//	FILE* pf2 = fopen("test.txt", "r");
+//	if (pf2 == NULL)
+//	{
+//		printf("打开文件失败\n");
+//		exit(-1);
+//	}
+//
+//	char arr[20];
+//	fgets(arr, 100, pf2);
+//	printf("%s\n", arr);
+//
+//	fclose(pf2);
+//
+//	return 0;
+//}
