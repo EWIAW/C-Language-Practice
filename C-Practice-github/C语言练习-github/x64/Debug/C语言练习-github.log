@@ -1,4 +1,4 @@
 ﻿cl : 命令行  warning D9025: 正在重写“/sdl”(用“/GS-”)
   test.c
-E:\github\C-Language-Practice\C-Practice-github\C语言练习-github\test.c(3484,3): warning C4013: “exit”未定义；假设外部返回 int
+E:\github\C-Language-Practice\C-Practice-github\C语言练习-github\test.c(3505,2): warning C4996: 'sscanf': This function or variable may be unsafe. Consider using sscanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
   C语言练习-github.vcxproj -> E:\github\C-Language-Practice\C-Practice-github\x64\Debug\C语言练习-github.exe

@@ -3473,21 +3473,37 @@
 //	return 0;
 //}
 
+//#include<stdio.h>
+//
+//int main()
+//{
+//	FILE* pf = fopen("test.txt", "w");
+//	if (pf == NULL)
+//	{
+//		printf("打开文件失败\n");
+//		exit(-1);
+//	}
+//
+//	fputs("hello world", pf);
+//	int ret = ftell(pf);
+//	printf("%d\n", ret);
+//
+//	fclose(pf);
+//	return 0;
+//}
+
 #include<stdio.h>
 
 int main()
 {
-	FILE* pf = fopen("test.txt", "w");
-	if (pf == NULL)
-	{
-		printf("打开文件失败\n");
-		exit(-1);
-	}
+	char arr[] = { "张三 18" };
+	printf("%s\n", arr);
 
-	fputs("hello world", pf);
-	int ret = ftell(pf);
-	printf("%d\n", ret);
+	char name[10];
+	int age;
 
-	fclose(pf);
+	sscanf(arr, "%s %d", name, &age);
+	printf("%s %d", name, age);
+
 	return 0;
 }
