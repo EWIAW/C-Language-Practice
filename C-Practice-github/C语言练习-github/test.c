@@ -3492,18 +3492,33 @@
 //	return 0;
 //}
 
+//#include<stdio.h>
+//
+//int main()
+//{
+//	char arr[] = { "张三 18" };
+//	printf("%s\n", arr);
+//
+//	char name[10];
+//	int age;
+//
+//	sscanf(arr, "%s %d", name, &age);
+//	printf("%s %d", name, age);
+//
+//	return 0;
+//}
+
 #include<stdio.h>
 
 int main()
 {
-	char arr[] = { "张三 18" };
-	printf("%s\n", arr);
-
-	char name[10];
-	int age;
-
-	sscanf(arr, "%s %d", name, &age);
-	printf("%s %d", name, age);
-
+	FILE* pf = fopen("test.txt", "w");
+	if (pf == NULL)
+	{
+		printf("open fail\n");
+		exit(-1);
+	}
+	
 	return 0;
 }
+	
