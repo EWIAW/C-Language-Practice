@@ -39,10 +39,15 @@ void gamestart(Snake* psnake)
 void CreatFood(Snake* psnake)
 {
 again:
-
-	int x = rand() % 198 + 1;
+	//生成食物的坐标
+	int x = rand() % 196 + 2;//生成横坐标
+	if (x % 2 != 0)//如果生成食物的横坐标 不是 偶数 则重新生成
+	{
+		goto again;
+	}
 	int y = rand() % 40 + 1;
 
+	//如果生成食物的坐标与蛇身重合，则重新生成
 	SnakeNode* cur = psnake->SnakeHead;
 	while (cur != NULL)
 	{
@@ -56,6 +61,7 @@ again:
 		}
 	}
 
+	//创建食物结点
 	SnakeNode* food = (SnakeNode*)malloc(sizeof(SnakeNode));
 	if (food == NULL)
 	{
@@ -111,9 +117,9 @@ void InitSnake(Snake* psnake)
 	}
 
 	//给每个蛇身坐标赋值
+	cur = SHead;
 	for (int i = 0; i < 5; i++)
 	{
-		cur = SHead;
 		cur->x = 100 - 2 * i;
 		cur->y = 20;
 		cur = cur->next;
@@ -126,6 +132,18 @@ void InitSnake(Snake* psnake)
 	psnake->SnakeHead = SHead;
 	psnake->snakeStatus = RIGHT;
 	psnake->speed = 200;
+
+	//读取游戏历史最高分数
+	FILE* pf = fopen("MaxScore.txt", "r");
+	if (pf == NULL)
+	{
+		psnake->maxscore = 0;
+	}
+	else
+	{
+		fscanf(pf, "%d\n", &psnake->maxscore);
+		fclose(pf);
+	}
 
 }
 
@@ -154,52 +172,197 @@ void pause()
 	}
 }
 
+//蛇运动函数
 void SnakeMove(Snake* psnake)
 {
+	//在蛇的前进方向上创建一个新结点
+	SnakeNode* newnode = (SnakeNode*)malloc(sizeof(SnakeNode));
+	if (newnode == NULL)
+	{
+		printf("SnakeMove:创建结点失败\n");
+		exit(-1);
+	}
+	newnode->next = NULL;
+
+	//判断当前蛇的运动状态 并 确定新结点的位置
+	switch (psnake->snakeStatus)
+	{
+	case RIGHT:
+		newnode->x = psnake->SnakeHead->x + 2;
+		newnode->y = psnake->SnakeHead->y;
+		break;
+	case LEFT:
+		newnode->x = psnake->SnakeHead->x - 2;
+		newnode->y = psnake->SnakeHead->y;
+		break;
+	case UP:
+		newnode->x = psnake->SnakeHead->x;
+		newnode->y = psnake->SnakeHead->y - 1;
+		break;
+	case DOWN:
+		newnode->x = psnake->SnakeHead->x;
+		newnode->y = psnake->SnakeHead->y + 1;
+		break;
+	}
+
+	//将新结点链接到蛇头的前面  头插
+	newnode->next = psnake->SnakeHead;
+	psnake->SnakeHead = newnode;
+
+	//判断蛇是否吃到自己
+	SnakeNode* cur = psnake->SnakeHead->next;
+	while (cur != NULL)
+	{
+		if (psnake->SnakeHead->x == cur->x && psnake->SnakeHead->y == cur->y)
+		{
+			psnake->gamesStatus = KILL_BY_SELF;
+			break;	
+		}
+		else
+		{
+			cur = cur->next;
+		}
+	}
+
+	//如果头结点 与 食物结点 重合 则 吃食物 分数增加 速度变快，并创建新食物
+	if (psnake->SnakeHead->x == psnake->Food->x && psnake->SnakeHead->y == psnake->Food->y)
+	{
+		free(psnake->Food);//释放食物结点
+		psnake->score += 10;
+		if (psnake->speed > 20)
+		{
+			psnake->speed -= 20;
+		}
+
+		//创建新食物 并 打印新食物
+		CreatFood(psnake);
+		setpos(psnake->Food->x, psnake->Food->y);
+		printf("★");
+
+		PrintSnake(psnake);
+	}
+	else if (psnake->SnakeHead->x == 0 ||
+			psnake->SnakeHead->x == 198 ||
+			psnake->SnakeHead->y == 0 ||
+			psnake->SnakeHead->y == 41)//如果头结点在墙上，则 游戏结束
+	{
+		psnake->gamesStatus = KILL_BY_WALL;
+	}
+	else//如果都不是，则蛇正常前进
+	{
+		//找到倒数第二个结点
+		SnakeNode* cur = psnake->SnakeHead;
+		while (cur->next->next != NULL)
+		{
+			cur = cur->next;
+		}
+
+		//覆盖掉尾结点 方块
+		setpos(cur->next->x, cur->next->y);
+		printf("  ");
+
+		free(cur->next);
+		cur->next = NULL;
+
+		PrintSnake(psnake);
+	}
 
 }
 
 //游戏运行
 void gamerun(Snake* psnake)
 {
-	setpos(70, 45);
-	printf("当前分数：%d", psnake->score);
+	do
+	{
+		setpos(70, 45);
+		printf("当前分数：%d", psnake->score);
 
-	//蛇的运动状态
-	if (JudgeKey(VK_LEFT) == 1)
-	{
-		psnake->snakeStatus = LEFT;
-	}
-	else if (JudgeKey(VK_RIGHT) == 1)
-	{
-		psnake->snakeStatus = RIGHT;
-	}
-	else if (JudgeKey(VK_UP) == 1)
-	{
-		psnake->snakeStatus = UP;
-	}
-	else if (JudgeKey(VK_DOWN) == 1)
-	{
-		psnake->snakeStatus = DOWN;
-	}
-	else if (JudgeKey(VK_ESCAPE) == 1)//退出按键
-	{
-		;
-	}
-	else if (JudgeKey(VK_SPACE) == 1)//暂停按键
-	{
-		pause();
-	}
+		setpos(130, 45);
+		printf("游戏历史最高分数:%d", psnake->maxscore);
 
-	sleep(psnake->speed);
+		//判断按键状态
+		if (JudgeKey(VK_LEFT) == 1 && psnake->snakeStatus!=RIGHT)
+		{
+			psnake->snakeStatus = LEFT;
+		}
+		else if (JudgeKey(VK_RIGHT) == 1 && psnake->snakeStatus!=LEFT)
+		{
+			psnake->snakeStatus = RIGHT;
+		}
+		else if (JudgeKey(VK_UP) == 1 && psnake->snakeStatus != DOWN)
+		{
+			psnake->snakeStatus = UP;
+		}
+		else if (JudgeKey(VK_DOWN) == 1 && psnake->snakeStatus != UP)
+		{
+			psnake->snakeStatus = DOWN;
+		}
+		else if (JudgeKey(VK_ESCAPE) == 1)//退出按键
+		{
+			psnake->gamesStatus = ESC;
+		}
+		else if (JudgeKey(VK_SPACE) == 1)//暂停按键
+		{
+			pause();
+		}
 
-	SnakeMove(psnake);
+		Sleep(psnake->speed);
+
+		SnakeMove(psnake);//蛇运动函数
+	} while (psnake->gamesStatus == OK);
 
 }
 
+//游戏结束善后工作  内存释放
 void gameend(Snake* psnake)
 {
+	if (psnake->gamesStatus == KILL_BY_SELF)
+	{
+		setpos(90, 20);
+		printf("你吃到自己了，游戏结束\n");
+	}
+	else
+	{
+		setpos(90, 20);
+		printf("你撞到墙了，游戏结束\n");
+	}
 
+	//判断游戏当前分数是否超过历史最高分数
+	if (psnake->score > psnake->maxscore)
+	{
+		FILE* pf = fopen("MaxScore.txt", "w");
+		if (pf == NULL)
+		{
+			printf("gameend:文件打开失败\n");
+			exit(-1);
+		}
+		fprintf(pf, "%d\n", psnake->score);
+
+		fclose(pf);
+	}
+	
+	//内存释放
+
+	free(psnake->Food);//释放食物结点
+	
+	//释放蛇身链表
+	SnakeNode* cur = (SnakeNode*)malloc(sizeof(SnakeNode));
+	if (cur == NULL)
+	{
+		printf("gameend:创建结点失败\n");
+		exit(-1);
+	}
+	cur = psnake->SnakeHead;
+	SnakeNode* curNext = cur->next;
+
+	while (curNext != NULL)
+	{
+		free(cur);
+		cur = curNext;
+		curNext = curNext->next;
+	}
+	free(cur);
+	cur = NULL;
 }
 
 //设置坐标
