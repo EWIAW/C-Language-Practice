@@ -3508,17 +3508,265 @@
 //	return 0;
 //}
 
+//#include<stdio.h>
+//
+//int main()
+//{
+//	FILE* pf = fopen("test.txt", "w");
+//	if (pf == NULL)
+//	{
+//		printf("open fail\n");
+//		exit(-1);
+//	}
+//	
+//	return 0;
+//}
+
+//#include<stdio.h>
+//
+//union UN
+//{
+//	short a[7];
+//	int b;
+//};
+//
+//int main()
+//{
+//	union UN un;
+//	printf("%d\n", sizeof(un));
+//	return 0;
+//}
+
+//#include<stdio.h>
+//
+//struct A
+//{
+//	char i;
+//	int a;
+//	long long b;
+//};
+//
+//int main()
+//{
+//	printf("%d\n", sizeof(struct A));
+//	return 0;
+//}
+
+//#include<stdio.h>
+//
+//int Count()
+//{
+//	static int a = 0;
+//	a++;
+//	printf("%d\n", a);
+//}
+//
+//int main()
+//{
+//	for (int i = 0; i < 10; i++)
+//	{
+//		Count();
+//	}
+//	return 0;
+//}
+
+//#include<stdio.h>
+//
+//int Judge(char* arr, int len)
+//{
+//    int count = 0;
+//    int tmp[26] = { 0 };
+//    for (int i = 0; i < len; i++)
+//    {
+//        tmp[arr[i] - 97]++;
+//    }
+//
+//    for (int i = 0; i < 26; i++)
+//    {
+//        if (tmp[i] != 0)
+//        {
+//            count++;
+//        }
+//    }
+//    return count;
+//}
+//
+//int main()
+//{
+//     请在此输入您的代码
+//    输入字符串
+//    char arr[50001];
+//    scanf("%s", arr);
+//
+//    int len = strlen(arr);
+//
+//    int ret = 0;
+//
+//    for (int input = 1; input <= len; input++)
+//    {
+//        int input2 = input;
+//        for (int i = 0; i <= len - input; i++)
+//        {
+//            int j = i;
+//            char arr2[50001];
+//            int k = 0;
+//            while (input > 0)
+//            {
+//                arr2[k] = arr[j];
+//                j++;
+//                k++;
+//                input--;
+//            }
+//            input = input2;
+//            ret = Judge(arr2, input2) + ret;
+//        }
+//    }
+//    printf("%d", ret);
+//
+//    return 0;
+//}
+	
+
+#include <stdio.h>
+//#include <stdlib.h>
+//
+//int main()
+//{
+//    int N;
+//    scanf("%d", &N);
+//
+//    int arr1[100000] = { 0 }；
+//        int arr2[100000] = { 0 }；
+//        int arr3[100000] = { 0 }；
+//
+//        for (int i = 0; i < N; i++)
+//        {
+//            scanf("%d", arr1[i]);
+//        }
+//
+//    for (int i = 0; i < N; i++)
+//    {
+//        scanf("%d", arr2[i]);
+//    }
+//
+//    for (int i = 0; i < N; i++)
+//    {
+//        scanf("%d", arr3[i]);
+//    }
+//
+//    int count = 0;//计数器
+//
+//    for (int i = 0; i < N; i++)
+//    {
+//        for (int j = 0; j < N;; j++)
+//        {
+//            if (arr1[i] < arr2[j])
+//            {
+//                for (int k = 0; k < N; k++)
+//                {
+//                    if (arr2[j] < arr3[k])
+//                    {
+//                        count++;
+//                    }
+//                }
+//            }
+//        }
+//    }
+//
+//    printf("%d\n", count);
+//
+//    return 0;
+//}
+
+//#include <stdio.h>
+//#include <stdlib.h>
+//
+//int main()
+//{
+//    int N;
+//    scanf("%d", &N);
+//
+//    int arr1[1000] = { 0 };
+//    int arr2[1000] = { 0 };
+//    int arr3[1000] = { 0 };
+//
+//    for (int i = 0; i < N; i++)
+//    {
+//        scanf("%d", &arr1[i]);
+//    }
+//
+//    for (int i = 0; i < N; i++)
+//    {
+//        scanf("%d", &arr2[i]);
+//    }
+//
+//    for (int i = 0; i < N; i++)
+//    {
+//        scanf("%d", &arr3[i]);
+//    }
+//
+//    int count = 0;//计数器
+//
+//    for (int i = 0; i < N; i++)
+//    {
+//        for (int j = 0; j < N; j++)
+//        {
+//            if (arr1[i] < arr2[j])
+//            {
+//                for (int k = 0; k < N; k++)
+//                {
+//                    if (arr2[j] < arr3[k])
+//                    {
+//                        count++;
+//                    }
+//                }
+//            }
+//        }
+//    }
+//
+//    printf("%d\n", count);
+//
+//    return 0;
+//}
+
 #include<stdio.h>
+#include<stdbool.h>
+#include<math.h>
+
+bool Judge(int x)
+{
+    for (int i = 2; i <= sqrt(x); i++)
+    {
+        if (x % i == 0)
+        {
+            return false;
+        }
+    }
+    return true;
+}
+
 
 int main()
 {
-	FILE* pf = fopen("test.txt", "w");
-	if (pf == NULL)
-	{
-		printf("open fail\n");
-		exit(-1);
-	}
-	
-	return 0;
+    int T;
+    scanf("%d", &T);
+
+    for (int i = 0; i < T; i++)
+    {
+        int input;
+        scanf("%d", &input);
+
+        int count = 0;
+        for (int j = 2; j <= input; j++)
+        {
+            bool ret = Judge(j);
+            if (ret == true)
+            {
+                count++;
+            }
+        }
+        printf("%d\n", count);
+    }
+
+    return 0;
 }
-	
