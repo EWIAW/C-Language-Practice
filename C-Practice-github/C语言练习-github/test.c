@@ -3729,44 +3729,64 @@
 //    return 0;
 //}
 
-#include<stdio.h>
-#include<stdbool.h>
-#include<math.h>
+//#include<stdio.h>
+//#include<stdbool.h>
+//#include<math.h>
+//
+//bool Judge(int x)
+//{
+//    for (int i = 2; i <= sqrt(x); i++)
+//    {
+//        if (x % i == 0)
+//        {
+//            return false;
+//        }
+//    }
+//    return true;
+//}
+//
+//
+//int main()
+//{
+//    int T;
+//    scanf("%d", &T);
+//
+//    for (int i = 0; i < T; i++)
+//    {
+//        int input;
+//        scanf("%d", &input);
+//
+//        int count = 0;
+//        for (int j = 2; j <= input; j++)
+//        {
+//            bool ret = Judge(j);
+//            if (ret == true)
+//            {
+//                count++;
+//            }
+//        }
+//        printf("%d\n", count);
+//    }
+//
+//    return 0;
+//}
 
-bool Judge(int x)
-{
-    for (int i = 2; i <= sqrt(x); i++)
-    {
-        if (x % i == 0)
-        {
-            return false;
-        }
-    }
-    return true;
-}
+#include<stdio.h>
+#include<stdlib.h>
 
 
 int main()
 {
-    int T;
-    scanf("%d", &T);
+	int* ret = (int*)malloc(sizeof(int) * 10);
+	if (ret == NULL)
+	{
+		printf("开辟失败\n");
+		exit(-1);
+	}
 
-    for (int i = 0; i < T; i++)
-    {
-        int input;
-        scanf("%d", &input);
+	free(ret);
+	ret = NULL;
+	free(ret);
 
-        int count = 0;
-        for (int j = 2; j <= input; j++)
-        {
-            bool ret = Judge(j);
-            if (ret == true)
-            {
-                count++;
-            }
-        }
-        printf("%d\n", count);
-    }
-
-    return 0;
+	return 0;
 }

@@ -7,12 +7,12 @@
       "RelativeMoniker": "D:0:0:{2C87FEA4-1390-4B50-AFC4-B93FCDABE4CA}|Snake\\Snake.vcxproj|solutionrelative:Snake\\game.c||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{2C87FEA4-1390-4B50-AFC4-B93FCDABE4CA}|Snake\\Snake.vcxproj|E:\\github\\C-Language-Practice\\Snake\\Snake\\test.c||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{2C87FEA4-1390-4B50-AFC4-B93FCDABE4CA}|Snake\\Snake.vcxproj|solutionrelative:Snake\\test.c||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{2C87FEA4-1390-4B50-AFC4-B93FCDABE4CA}|Snake\\Snake.vcxproj|E:\\github\\C-Language-Practice\\Snake\\Snake\\game.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
       "RelativeMoniker": "D:0:0:{2C87FEA4-1390-4B50-AFC4-B93FCDABE4CA}|Snake\\Snake.vcxproj|solutionrelative:Snake\\game.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2C87FEA4-1390-4B50-AFC4-B93FCDABE4CA}|Snake\\Snake.vcxproj|E:\\github\\C-Language-Practice\\Snake\\Snake\\test.c||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{2C87FEA4-1390-4B50-AFC4-B93FCDABE4CA}|Snake\\Snake.vcxproj|solutionrelative:Snake\\test.c||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     }
   ],
   "DocumentGroupContainers": [
@@ -26,7 +26,7 @@
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 1,
               "Title": "game.h",
               "DocumentMoniker": "E:\\github\\C-Language-Practice\\Snake\\Snake\\game.h",
               "RelativeDocumentMoniker": "Snake\\game.h",
@@ -46,7 +46,7 @@
               "RelativeDocumentMoniker": "Snake\\game.c",
               "ToolTip": "E:\\github\\C-Language-Practice\\Snake\\Snake\\game.c",
               "RelativeToolTip": "Snake\\game.c",
-              "ViewState": "AQIAAIMBAAAAAAAAAAAAAAEAAAAAAAAA",
+              "ViewState": "AQIAAHgAAAAAAAAAAAAIwJ0AAAACAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000423|",
               "WhenOpened": "2024-02-27T14:17:01.18Z",
               "IsPinned": true,
@@ -54,7 +54,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 2,
               "Title": "test.c",
               "DocumentMoniker": "E:\\github\\C-Language-Practice\\Snake\\Snake\\test.c",
               "RelativeDocumentMoniker": "Snake\\test.c",
@@ -63,8 +63,7 @@
               "ViewState": "AQIAAAAAAAAAAAAAAAAAABgAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000423|",
               "WhenOpened": "2024-02-26T15:39:27.362Z",
-              "IsPinned": true,
-              "EditorCaption": ""
+              "IsPinned": true
             }
           ]
         }
