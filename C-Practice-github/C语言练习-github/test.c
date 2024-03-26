@@ -3798,3 +3798,10 @@ int main()
 	printf("测试代码\n");
 	return 0;
 }
+#include<stdio.h>
+
+int main()
+{
+	printf("测试代码\n");
+	return 0;
+}
