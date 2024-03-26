@@ -3771,22 +3771,30 @@
 //    return 0;
 //}
 
-#include<stdio.h>
-#include<stdlib.h>
+//#include<stdio.h>
+//#include<stdlib.h>
+//
+//
+//int main()
+//{
+//	int* ret = (int*)malloc(sizeof(int) * 10);
+//	if (ret == NULL)
+//	{
+//		printf("开辟失败\n");
+//		exit(-1);
+//	}
+//
+//	free(ret);
+//	ret = NULL;
+//	free(ret);
+//
+//	return 0;
+//}
 
+#include<stdio.h>
 
 int main()
 {
-	int* ret = (int*)malloc(sizeof(int) * 10);
-	if (ret == NULL)
-	{
-		printf("开辟失败\n");
-		exit(-1);
-	}
-
-	free(ret);
-	ret = NULL;
-	free(ret);
-
+	printf("测试代码\n");
 	return 0;
 }
